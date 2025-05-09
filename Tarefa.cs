@@ -8,7 +8,7 @@ namespace SistemaGestaoProjetosETarefas
 {
     public class Tarefa
     {
-        public int IdTarefa { get; set; }
+        public int IdTarefa { get; private set; }
         public string? NameTarefa { get; set; }
         public string? DescricaoTarefa { get; set; }
         public DateTime DataInicio { get; set; }

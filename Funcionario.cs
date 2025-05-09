@@ -8,7 +8,7 @@ namespace SistemaGestaoProjetosETarefas
 {
     public class Funcionario
     {
-        public int IdFuncionario { get; set; }
+        public int IdFuncionario { get; private set; }
         public List<Tarefa>? Tarefas { get; set; }
     }
 }
