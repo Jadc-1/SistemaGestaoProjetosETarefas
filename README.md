@@ -9,7 +9,7 @@ Este é um sistema simples de gestão de projetos e tarefas, desenvolvido para u
 - **Controle de Status de Tarefas**: Marcação de tarefas como 'Pendentes', 'Em andamento' ou 'Concluídas'.
 - **Exibição de Projetos e Tarefas**: Visualização dos projetos e suas respectivas tarefas.
 - **Cadastro de Funcionário e Gestor**
-- **Criar tarefas por meio de uma IA**: Enviar o nome do projeto e a IA criará as tarefas principaisnecessárias para o seu desenvolvimento
+- **Criar tarefas por meio de uma IA**: Enviar o nome do projeto e a IA criará as tarefas principais necessárias para o seu desenvolvimento
 - **Gerar relatórios por meio de uma IA**: De acordo com os projetos, tarefas realizadas a IA desenvolverá um relatório do projeto, bem como dos funcionários envolvidos.
 
 ## Tecnologias
