@@ -21,4 +21,4 @@ Este é um sistema simples de gestão de projetos e tarefas, desenvolvido para u
 
 1. Clone este repositório:
    ```bash
-   git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/Jadc-1/SistemaGestaoProjetosETarefas)
+   git clone [https://github.com/Jadc-1/SistemaGestaoProjetosETarefas]
