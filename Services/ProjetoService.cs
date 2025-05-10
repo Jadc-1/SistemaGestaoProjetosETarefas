@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SistemaGestaoProjetosETarefas.Domain;
 
-namespace SistemaGestaoProjetosETarefas.Gerenciadores
+namespace SistemaGestaoProjetosETarefas.Service
 {
-    public class ProjetoGerenciador
+    public class ProjetoService
     {
         public List<Projeto> projetos = new List<Projeto>();
 

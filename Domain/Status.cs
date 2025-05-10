@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaGestaoProjetosETarefas
+namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Status
     {

@@ -1,4 +1,5 @@
-﻿using SistemaGestaoProjetosETarefas.Gerenciadores;
+﻿using SistemaGestaoProjetosETarefas.Service;
+using SistemaGestaoProjetosETarefas.Domain;
 using System;
 
 namespace SistemaGestaoProjetosETarefas
@@ -7,7 +8,7 @@ namespace SistemaGestaoProjetosETarefas
     {
         static void Main(string[] args)
         {
-            
+           
         }
     }
 }

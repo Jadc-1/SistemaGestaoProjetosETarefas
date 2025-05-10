@@ -1,11 +1,11 @@
-﻿using SistemaGestaoProjetosETarefas.Gerenciadores;
+﻿using SistemaGestaoProjetosETarefas.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaGestaoProjetosETarefas
+namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Departamento
     {
@@ -20,7 +20,7 @@ namespace SistemaGestaoProjetosETarefas
             IdDept = _IdIncremento++;
             this.NomeDept = nomeDept;
             this.Funcionarios = new List<Funcionario>();
-            DepartamentoGerenciador.AdicionarDepartamento(this); // Adiciona o departamento à lista de departamentos
+            DepartamentoService.AdicionarDepartamento(this); // Adiciona o departamento à lista de departamentos
         }
 
         public void AdicionarFuncionario(Funcionario funcionario)

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SistemaGestaoProjetosETarefas.Domain;
 
-namespace SistemaGestaoProjetosETarefas.Gerenciadores
+namespace SistemaGestaoProjetosETarefas.Service
 {
-    public class DepartamentoGerenciador
+    public class DepartamentoService
     {
         private static List<Departamento> _departamentos { get; set; } = new List<Departamento>();
 

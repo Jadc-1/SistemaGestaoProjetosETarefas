@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaGestaoProjetosETarefas
+namespace SistemaGestaoProjetosETarefas.Domain
 {
-    public class Relatorio
+    public class Funcionario
     {
         public int IdFuncionario { get; private set; }
         public List<Tarefa>? Tarefas { get; set; }
-        public Status? StatusTarefa { get; set; }
+        public Departamento? Departamento { get; set; }
     }
 }
