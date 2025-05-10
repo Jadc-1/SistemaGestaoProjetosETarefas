@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaGestaoProjetosETarefas.Gerenciadores;
+using System;
 
 namespace SistemaGestaoProjetosETarefas
 {
@@ -6,7 +7,7 @@ namespace SistemaGestaoProjetosETarefas
     {
         static void Main(string[] args)
         {
-           
+            
         }
     }
 }

@@ -10,5 +10,6 @@ namespace SistemaGestaoProjetosETarefas
     {
         public int IdFuncionario { get; private set; }
         public List<Tarefa>? Tarefas { get; set; }
+        public Departamento? Departamento { get; set; }
     }
 }

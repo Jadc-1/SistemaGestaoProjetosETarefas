@@ -26,7 +26,7 @@ namespace SistemaGestaoProjetosETarefas
         public static readonly Status EmEspera = new Status("Em Espera");
         public static readonly Status EmRevisao = new Status("Em Revisão");
 
-        public static List<Status> TodosStatus()
+        public static List<Status> ExibirTodosStatus()
         {
             return new List<Status>
             {
@@ -40,12 +40,20 @@ namespace SistemaGestaoProjetosETarefas
             };
         }
 
-        public void AdicionarNovoStatus(string categoria)
+        public static void AdicionarNovoStatus(string categoria)
         {
             if (categoria != null)
             {          
                 Status status = new Status(categoria);
-                TodosStatus().Add(status);
+                ExibirTodosStatus().Add(status);
+            }
+        }
+
+        public static void RemoverStatus(Status status)
+        {
+            if (status != null)
+            {
+                ExibirTodosStatus().Remove(status);
             }
         }
     }

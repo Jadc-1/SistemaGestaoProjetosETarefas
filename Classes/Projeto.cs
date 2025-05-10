@@ -16,10 +16,10 @@ namespace SistemaGestaoProjetosETarefas
         public DateTime DataInicio { get; set; }
         public DateTime DataTermino { get; set; }
         public Status? StatusProjeto { get; set; }
-        public string? Prioridade { get; set; }
+        public char Prioridade { get; set; }
         public Gestor? GestorDelegado { get; set; }
 
-        public Projeto(string nome, string desc, DateTime dataInicio, Status statusProjeto, string prioridade)
+        public Projeto(string nome, string desc, DateTime dataInicio, Status statusProjeto, char prioridade)
         {
             CodigoDoProjeto = _IdIncremento++;
             this.Nome = nome;
@@ -54,9 +54,9 @@ namespace SistemaGestaoProjetosETarefas
             }
         }
 
-        public void AlterarPrioridade(string prioridade)
+        public void AlterarPrioridade(char prioridade)
         {
-            if (!string.IsNullOrEmpty(prioridade))
+            if (prioridade != '\0') // Verifica se a prioridade não é nula
             {
                 this.Prioridade = prioridade;
             }
@@ -72,13 +72,30 @@ namespace SistemaGestaoProjetosETarefas
 
         public void RemoverGestor()
         {
-            this.GestorDelegado = null;
+            if (GestorDelegado != null)
+            {
+                this.GestorDelegado = null;
+            }
+            else
+            {
+                Console.WriteLine("Nenhum gestor atribuído ao projeto.");
+            }
         }
 
         public void FinalizarProjeto()
         {
-            StatusProjeto = Status.Concluido;
+            this.StatusProjeto = Status.Concluido;
         }
 
+        public override string ToString()
+        {
+            return "Projeto: " + Nome + "\n" +
+                   "Descrição: " + Desc + "\n" +
+                   "Data de Início: " + DataInicio.ToString("dd/MM/yyyy") + "\n" +
+                   "Data de Término: " + DataTermino.ToString("dd/MM/yyyy") + "\n" +
+                   "Status: " + StatusProjeto?.Categoria + "\n" +
+                   "Prioridade: " + Prioridade + "\n" +
+                   "Gestor Delegado: " + GestorDelegado?.Nome;
+        }
     }
 }
