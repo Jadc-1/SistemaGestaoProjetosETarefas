@@ -8,7 +8,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Status
     {
-        private static int _IdIncremento = 1;
+        private static int _IdIncremento = 0;
         public int IdStatus { get; private set; }
         public string? Categoria { get; set; }
 

@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Service
 {
     public class ProjetoService
     {
-        public List<Projeto> projetos = new List<Projeto>();
+        private static readonly List<Projeto> projetos = new List<Projeto>();
 
         public void AdicionarProjeto(Projeto projeto)
         {
@@ -33,8 +33,12 @@ namespace SistemaGestaoProjetosETarefas.Service
             {
                 foreach (var projeto in projetos)
                 {
-                    Console.WriteLine($"Projeto: {projeto.Nome}");
+                    Console.WriteLine($"ID: {projeto.CodigoDoProjeto} Projeto: {projeto.Nome}");
                 }
+            }
+            else
+            {
+                Console.WriteLine("Nenhum projeto cadastrado.");
             }
         }
     }

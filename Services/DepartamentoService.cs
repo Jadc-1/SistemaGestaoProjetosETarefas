@@ -11,7 +11,7 @@ namespace SistemaGestaoProjetosETarefas.Service
     {
         private static List<Departamento> _departamentos { get; set; } = new List<Departamento>();
 
-        public static void ListarDepartamentos()
+        public void ListarDepartamentos()
         {
             if (_departamentos != null)
             {
@@ -24,15 +24,19 @@ namespace SistemaGestaoProjetosETarefas.Service
 
                 }
             }
+            else
+            {
+                Console.WriteLine("Nenhum departamento cadastrado.");
+            }
         }
-        public static void AdicionarDepartamento(Departamento departamento)
+        public void AdicionarDepartamento(Departamento departamento)
         {
             if (departamento != null)
             {
                 _departamentos.Add(departamento);
             }
         }
-        public static void DesativarDepartamento(int id)
+        public void DesativarDepartamento(int id)
         {
             var departamento = _departamentos.FirstOrDefault(departamento => departamento.IdDept == id); // Busca o departamento pelo ID
             if (departamento != null && departamento.Ativo != false)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaGestaoProjetosETarefas.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Projeto
     {
-        private static int _IdIncremento = 1;
+        private static int _IdIncremento = 0;
         public int CodigoDoProjeto { get; private set; }
         public string? Nome { get; set; }
         public string? Desc { get; set; }
@@ -16,6 +17,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public DateTime DataInicio { get; set; }
         public DateTime DataTermino { get; set; }
         public Status? StatusProjeto { get; set; }
+        public List<Status>? StatusTarefas { get; set; }
         public char Prioridade { get; set; }
         public Gestor? GestorDelegado { get; set; }
 
@@ -25,6 +27,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
             this.Nome = nome;
             this.Desc = desc;
             this.Tarefas = new List<Tarefa>();
+            this.StatusTarefas = new List<Status>();
             this.DataInicio = dataInicio;
             this.StatusProjeto = statusProjeto;
             this.Prioridade = prioridade;
@@ -67,6 +70,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
             if (gestor != null)
             {
                 this.GestorDelegado = gestor;
+                gestor.ProjetosGerenciados.Add(this);
             }
         }
 
@@ -85,14 +89,15 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public void FinalizarProjeto()
         {
             this.StatusProjeto = Status.Concluido;
+            this.DataTermino = DateTime.Now;
         }
+
 
         public override string ToString()
         {
             return "Projeto: " + Nome + "\n" +
                    "Descrição: " + Desc + "\n" +
                    "Data de Início: " + DataInicio.ToString("dd/MM/yyyy") + "\n" +
-                   "Data de Término: " + DataTermino.ToString("dd/MM/yyyy") + "\n" +
                    "Status: " + StatusProjeto?.Categoria + "\n" +
                    "Prioridade: " + Prioridade + "\n" +
                    "Gestor Delegado: " + GestorDelegado?.Nome;

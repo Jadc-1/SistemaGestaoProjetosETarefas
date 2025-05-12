@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Departamento
     {
-        private static int _IdIncremento = 1;
+        private static int _IdIncremento = 0;
         public int IdDept { get; private set; }
         public string? NomeDept { get; set; }
         public List<Funcionario>? Funcionarios { get; set; }
@@ -20,7 +20,6 @@ namespace SistemaGestaoProjetosETarefas.Domain
             IdDept = _IdIncremento++;
             this.NomeDept = nomeDept;
             this.Funcionarios = new List<Funcionario>();
-            DepartamentoService.AdicionarDepartamento(this); // Adiciona o departamento à lista de departamentos
         }
 
         public void AdicionarFuncionario(Funcionario funcionario)

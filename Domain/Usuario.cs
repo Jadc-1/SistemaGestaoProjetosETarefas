@@ -29,7 +29,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
             this.Endereco = endereco;
         }
 
-        public static void Desativar(Usuario usuario) 
+        public void Desativar(Usuario usuario) 
         {
             usuario.Ativo = false;
         }

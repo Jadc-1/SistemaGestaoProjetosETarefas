@@ -9,11 +9,11 @@ namespace SistemaGestaoProjetosETarefas.Domain
     public class Endereco
     {
         public string Rua { get; set; }
-        public int Numero { get; set; }
+        public string Numero { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
 
-        public Endereco(string rua, int numero, string cidade, string estado) 
+        public Endereco(string rua, string numero, string cidade, string estado) 
         {
             this.Rua = rua;
             this.Numero = numero;

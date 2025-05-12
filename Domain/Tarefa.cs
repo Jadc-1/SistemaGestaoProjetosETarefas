@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Tarefa
     {
-        private static int _idIncremento = 1;
+        private static int _idIncremento = 0;
         public int IdTarefa { get; private set; }
         public string? NomeTarefa { get; set; }
         public string? DescricaoTarefa { get; set; }
