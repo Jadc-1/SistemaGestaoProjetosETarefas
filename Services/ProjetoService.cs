@@ -34,7 +34,7 @@ namespace SistemaGestaoProjetosETarefas.Service
             {
                 if (ProjetoService.projetos.Count != 0)
                 {
-                    var chave = $"[darkred_1] Projeto: [/] {projeto.Nome}"; // Defino que a chave recebe o ID do projeto e o nome do projeto
+                    var chave = $"[cornflowerblue] Projeto: [/] {projeto.Nome}"; // Defino que a chave recebe o ID do projeto e o nome do projeto
                     projetos.Add(chave, projeto);
                 }
             }

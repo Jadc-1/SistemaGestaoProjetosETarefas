@@ -41,22 +41,20 @@ namespace SistemaGestaoProjetosETarefas.Views
                         .AddChoices(new[]
                         {
                             "Gerenciar Projetos",
-                            "Gerenciar Tarefas",
                             "Gerenciar Departamentos",
                             "Gerenciar Usuários",
                             "Relatórios",
-                            "Sair"
+                            "[red]Sair[/]"
                         })
                     );
 
                 switch (opcao)
                 { // Chamar os métodos para gerencia-los
                     case "Gerenciar Projetos": ProjetoView.MenuProjetos(); break;
-                    case "Gerenciar Tarefas": Console.WriteLine("Tarefas"); break;
                     case "Gerenciar Departamentos": Console.WriteLine("Departamentos"); break;
                     case "Gerenciar Usuários": Console.WriteLine("Usuarios"); break;
                     case "Relatórios": Console.WriteLine("Relatorio"); break;
-                    case "Sair":
+                    case "[red]Sair[/]":
                         {
                             AnsiConsole.Clear();
                             AnsiConsole.MarkupLine("[red]Saindo do sistema...[/]");
@@ -65,7 +63,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                         }    
                 }
 
-            } while (opcao != "Sair");
+            } while (opcao != "[red]Sair[/]");
         }
     }
 }
