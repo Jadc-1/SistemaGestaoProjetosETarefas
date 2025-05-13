@@ -28,5 +28,13 @@ namespace SistemaGestaoProjetosETarefas.Domain
             StatusTarefa = statusTarefa;
             Prioridade = prioridade;
         }
+
+        public void AtribuirFuncionario(Funcionario funcionario)
+        {
+            if (funcionario != null)
+            {
+                FuncionarioDelegado = funcionario;
+            }
+        }
     }
 }
