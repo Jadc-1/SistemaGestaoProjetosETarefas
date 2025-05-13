@@ -13,7 +13,7 @@ namespace SistemaGestaoProjetosETarefas.Views
 {
     public class ProjetoView
     {
-       
+        private static readonly Dictionary<string,Projeto> Projetos = ProjetoService.ListarProjetos();
 
         public static void MenuProjetos()
         {
@@ -21,17 +21,17 @@ namespace SistemaGestaoProjetosETarefas.Views
             do
             {
                 AnsiConsole.Clear();
-                var projetos = ProjetoService.ListarProjetos(); // Chama o método para exibir todos os projetos cadastrados
+                
                 AnsiConsole.Write(new Rule("[gold1]Gerenciar Projetos[/]").RuleStyle("grey").Centered());
                 Console.WriteLine();
-                if (projetos.Count > 0)
+                if (Projetos.Count > 0)
                 {
                     
                     var opcoes = AnsiConsole.Prompt
                     (
                         new SelectionPrompt<string>()
                         .Title("[gold1] Selecione um Projeto[/]")
-                        .AddChoices(projetos.Keys)
+                        .AddChoices(Projetos.Keys)
                         .AddChoices(voltar)
                     );
                     if (opcoes == voltar)
@@ -40,15 +40,13 @@ namespace SistemaGestaoProjetosETarefas.Views
                     }
                     else
                     {
-                        var projetoEscolhido = projetos[opcoes]; // A variável projeto recebe o valor do dicionário, onde a chave é o projeto escolhido
+                        var projetoEscolhido = Projetos[opcoes]; // A variável projeto recebe o valor do dicionário, onde a chave é o projeto escolhido
                         ExibirProjeto(projetoEscolhido); // Chama o método para exibir o projeto escolhido
                     }
-                    
-
                 }
                 else
                 {
-
+                    // Fazer interface, caso não tenha nenhum projeto cadastrado!
                 }
             } while (true);
             
@@ -137,8 +135,8 @@ namespace SistemaGestaoProjetosETarefas.Views
 
            switch(opcao)
             {
-                case "[cornflowerblue]1-[/] Adicionar Tarefa":AdicionarNovaTarefa(projeto); break;
-                case "[cornflowerblue]2-[/] Remover Tarefa": break;
+                case "[cornflowerblue]1-[/] Adicionar Tarefa": AdicionarNovaTarefa(projeto); break;
+                case "[cornflowerblue]2-[/] Remover Tarefa": RemoverTarefa(projeto); break;
                 case "[cornflowerblue]3-[/] Alterar Status": break;
                 case "[cornflowerblue]4-[/] Alterar Prioridade": break;
                 case "[cornflowerblue]5-[/] Atribuir Gestor": break;
@@ -154,7 +152,7 @@ namespace SistemaGestaoProjetosETarefas.Views
             while(true)
             {
                 AnsiConsole.Clear();
-                var titulo = new Panel(new Text($"Adicionar nova tarefa ao projeto {projeto.Nome}", new Style(Color.Gold1)).Centered()).Border(BoxBorder.Heavy);
+                var titulo = new Panel(new Text($"Adicionar tarefas - Projeto: {projeto.Nome}", new Style(Color.Gold1)).Centered()).Border(BoxBorder.Heavy);
                 titulo.Expand();
                 AnsiConsole.Write(titulo);
                 Console.WriteLine();
@@ -162,7 +160,6 @@ namespace SistemaGestaoProjetosETarefas.Views
                 Console.WriteLine();
 
                 var nome = AnsiConsole.Ask<string>(($"[cornflowerblue] Nome da Tarefa: [/] "));
-                if (string.IsNullOrEmpty(nome)) AnsiConsole.WriteLine("[red]Nome inválido![/]"); //Não permitir a pessoa cadastrar uma tarefa sem nome
                 Console.WriteLine();
                 var descricao = AnsiConsole.Ask<string>(($"[cornflowerblue] Descrição da Tarefa: [/] ")); //descrição poderá ser nula ou vazia
                 Console.WriteLine();
@@ -212,15 +209,75 @@ namespace SistemaGestaoProjetosETarefas.Views
                     projeto.AdicionarTarefa(tarefa); // Chama o método para adicionar a tarefa ao projeto
                     AnsiConsole.MarkupLine($"[green] Tarefa {tarefa.NomeTarefa} Adicionada com sucesso![/]"); Console.WriteLine("\n");
                     Thread.Sleep(1000);
+                    ExibirProjeto(projeto);
                     break;
                 }
                 else
                 {
                     AnsiConsole.MarkupLine($"[red] Tarefa não adicionada![/]"); Console.WriteLine("\n");
                     Thread.Sleep(1000);
+                    ExibirProjeto(projeto);
                     break;
                 }
             }
         }
+
+        private static void RemoverTarefa(Projeto projeto)
+        {
+            while(true)
+            {
+                var tarefas = ProjetoService.ListarTarefasDoProjeto(projeto);
+                AnsiConsole.Clear();
+                var titulo = new Panel(new Text($"Remover tarefas - Projeto: {projeto.Nome}", new Style(Color.Gold1)).Centered()).Border(BoxBorder.Heavy);
+                titulo.Expand();
+                AnsiConsole.Write(titulo);
+                Console.WriteLine();
+                AnsiConsole.Write(new Rule().RuleStyle("grey").LeftJustified());
+                Console.WriteLine();
+                if (tarefas.Count == 0)
+                {
+                    AnsiConsole.MarkupLine("[red]Nenhuma tarefa cadastrada para este projeto.[/]");
+                    Thread.Sleep(1000);
+                    return;
+                }
+
+                var voltar = "[red]Voltar[/]";
+                var escolha = AnsiConsole.Prompt
+                    (
+                        new SelectionPrompt<string>()
+                        .Title("[gold3] Selecione a tarefa a ser excluída: [/]")
+                        .AddChoices(tarefas)
+                        .AddChoices(voltar)
+                    );
+                if (escolha == voltar) return; // Se o usuário escolher voltar, sai do método
+                var confirmacao = AnsiConsole.Prompt
+                    (
+                        new SelectionPrompt<string>()
+                        .Title($"[gold1] Deseja realmente remover a tarefa {escolha}?[/]")
+                        .AddChoices(new[]
+                        {
+                        "[green] Confirmar[/]", "[red] Cancelar[/]"
+                        })
+                    );
+                if (confirmacao == "[red] Cancelar[/]")
+                {
+                    AnsiConsole.MarkupLine($"[red] Operação de remoção cancelada![/]"); Console.WriteLine("\n");
+                    Thread.Sleep(1000);
+                    ExibirProjeto(projeto);
+                    break;
+                }
+                else
+                {
+                    var tarefa = projeto.Tarefas!.FirstOrDefault(t => t.NomeTarefa == escolha);
+                    projeto.RemoverTarefa(tarefa!);
+                    AnsiConsole.MarkupLine($"[green] Tarefa {tarefa!.NomeTarefa} Removida com sucesso![/]"); Console.WriteLine("\n");
+                    Thread.Sleep(1000);
+                    ExibirProjeto(projeto);
+                    break;
+                }
+                
+            }
+        }
+
     }
 }

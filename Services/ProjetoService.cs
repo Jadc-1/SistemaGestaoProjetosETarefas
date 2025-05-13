@@ -40,5 +40,19 @@ namespace SistemaGestaoProjetosETarefas.Service
             }
             return projetos;
         }
+
+        public static List<string> ListarTarefasDoProjeto(Projeto projeto)
+        {
+            List<string> lista = new List<string>();
+            if (projeto.Tarefas?.Count != 0)
+            {
+                foreach(var tarefa in projeto.Tarefas!)
+                {
+                    lista.Add(tarefa.NomeTarefa!);
+                }
+                return lista;
+            }
+            return lista;
+        }
     }
 }
