@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Service
 {
     public class ProjetoService
     {
-        private static readonly List<Projeto> projetos = new List<Projeto>();
+        public static readonly List<Projeto> projetos = new List<Projeto>();
 
         public void AdicionarProjeto(Projeto projeto)
         {
@@ -26,20 +26,19 @@ namespace SistemaGestaoProjetosETarefas.Service
                 projetos.Remove(projeto);
             }
         }
-
-        public void ListarProjetos()
+        public static Dictionary<string, Projeto> ListarProjetos()
         {
-            if(projetos != null)
+            var projetos = new Dictionary<string, Projeto>(); // Dicionário para armazenar as opções de projetos ja criados na lista do ProjetoService
+
+            foreach (var projeto in ProjetoService.projetos)
             {
-                foreach (var projeto in projetos)
+                if (ProjetoService.projetos.Count != 0)
                 {
-                    Console.WriteLine($"ID: {projeto.CodigoDoProjeto} Projeto: {projeto.Nome}");
+                    var chave = $"[darkred_1] Projeto: [/] {projeto.Nome}"; // Defino que a chave recebe o ID do projeto e o nome do projeto
+                    projetos.Add(chave, projeto);
                 }
             }
-            else
-            {
-                Console.WriteLine("Nenhum projeto cadastrado.");
-            }
+            return projetos;
         }
     }
 }

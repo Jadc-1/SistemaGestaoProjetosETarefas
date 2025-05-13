@@ -92,6 +92,11 @@ namespace SistemaGestaoProjetosETarefas.Domain
             this.DataTermino = DateTime.Now;
         }
 
+        public void CancelarProjeto()
+        {
+            this.StatusProjeto = Status.Cancelado;
+            this.DataTermino = DateTime.Now;
+        }
 
         public override string ToString()
         {

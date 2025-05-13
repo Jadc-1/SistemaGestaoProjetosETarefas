@@ -2,6 +2,8 @@
 using SistemaGestaoProjetosETarefas.Domain;
 using System;
 using SistemaGestaoProjetosETarefas.Services;
+using Spectre.Console;
+using SistemaGestaoProjetosETarefas.Views;
 
 namespace SistemaGestaoProjetosETarefas
 {
@@ -9,6 +11,9 @@ namespace SistemaGestaoProjetosETarefas
     {
         static void Main(string[] args)
         {
+            MenuView.MenuPrincipal();
+
+            
         }
     }
 }
