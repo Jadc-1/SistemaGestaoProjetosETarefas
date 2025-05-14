@@ -21,7 +21,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public char Prioridade { get; set; }
         public Gestor? GestorDelegado { get; set; }
 
-        public Projeto(string nome, string desc, DateTime dataInicio, Status statusProjeto, char prioridade)
+        public Projeto(string nome, string desc, DateTime dataInicio, char prioridade)
         {
             CodigoDoProjeto = _IdIncremento++;
             this.Nome = nome;
@@ -29,7 +29,6 @@ namespace SistemaGestaoProjetosETarefas.Domain
             this.Tarefas = new List<Tarefa>();
             this.StatusTarefas = new List<Status>();
             this.DataInicio = dataInicio;
-            this.StatusProjeto = statusProjeto;
             this.Prioridade = prioridade;
         }
 
@@ -46,14 +45,6 @@ namespace SistemaGestaoProjetosETarefas.Domain
             if (tarefa != null && Tarefas != null)
             {
                 Tarefas.Remove(tarefa);
-            }
-        }
-
-        public void AlterarStatus(Status status)
-        {
-            if (status != null)
-            {
-                this.StatusProjeto = status;
             }
         }
 

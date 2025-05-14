@@ -25,7 +25,7 @@ namespace SistemaGestaoProjetosETarefas.Views
             departamento.AdicionarFuncionario(joao);
             FuncionarioService funcionarioService = new FuncionarioService();
             funcionarioService.AdicionarFuncionario(joao);
-            Projeto projeto = new Projeto("teste", "teste1", DateTime.Now, Domain.Status.Atrasado, 'C');
+            Projeto projeto = new Projeto("teste", "teste1", DateTime.Now, 'C');
             ProjetoService projetoService = new ProjetoService();
             Tarefa tarefa = new Tarefa("Tarefa 1", "Descricao da tarefa 1", DateTime.Now, Domain.Status.Atrasado, 'C');
             projeto.AdicionarTarefa(tarefa);
@@ -33,7 +33,7 @@ namespace SistemaGestaoProjetosETarefas.Views
             Tarefa tarefa1 = new Tarefa("Tarefa 2", "Descricao da tarefa 2", DateTime.Now, Domain.Status.Atrasado, 'C');
             projeto.AdicionarTarefa(tarefa1);
             projetoService.AdicionarProjeto(projeto);
-            Projeto projeto1 = new Projeto("teste2", "teste3", DateTime.Now, Domain.Status.Atrasado, 'C');
+            Projeto projeto1 = new Projeto("teste2", "teste3", DateTime.Now, 'C');
             projetoService.AdicionarProjeto(projeto1);
             string opcao;
             do

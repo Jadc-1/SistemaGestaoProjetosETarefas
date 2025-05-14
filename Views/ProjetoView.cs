@@ -71,6 +71,15 @@ namespace SistemaGestaoProjetosETarefas.Views
 
         private static void InformacoesProjeto(Projeto projeto)
         {
+            if(projeto.Tarefas!.Count == 0)
+            {
+                projeto.StatusProjeto = Domain.Status.Pendente;
+            }
+            else if(projeto.Tarefas!.Count > 0 && projeto.StatusProjeto != Domain.Status.Concluido && projeto.StatusProjeto != Domain.Status.Cancelado)
+            {
+                projeto.StatusProjeto = Domain.Status.EmAndamento;
+            }
+
             AnsiConsole.Clear();
             AnsiConsole.Write(new Rule($"[gold1]{projeto.Nome}[/]").RuleStyle("grey").Centered());
             Console.WriteLine();
@@ -138,12 +147,11 @@ namespace SistemaGestaoProjetosETarefas.Views
                       "[cornflowerblue]1-[/] Adicionar Tarefa",
                       "[cornflowerblue]2-[/] Remover Tarefa",
                       "[cornflowerblue]3-[/] Editar Tarefa Existente",
-                      "[cornflowerblue]4-[/] Alterar Status do Projeto",
-                      "[cornflowerblue]5-[/] Alterar Prioridade",
-                      "[cornflowerblue]6-[/] Atribuir Gestor",
-                      "[cornflowerblue]7-[/] Remover Gestor",
-                      "[cornflowerblue]8-[/] Finalizar Projeto",
-                      "[cornflowerblue]9-[/] Cancelar Projeto",
+                      "[cornflowerblue]4-[/] Alterar Prioridade",
+                      "[cornflowerblue]5-[/] Atribuir Gestor",
+                      "[cornflowerblue]6-[/] Remover Gestor",
+                      "[cornflowerblue]7-[/] Finalizar Projeto",
+                      "[cornflowerblue]8-[/] Cancelar Projeto",
                       "[red]Voltar[/] "
                   })
                 );
@@ -153,13 +161,12 @@ namespace SistemaGestaoProjetosETarefas.Views
                     case "[cornflowerblue]1-[/] Adicionar Tarefa": AdicionarNovaTarefa(projeto); break;
                     case "[cornflowerblue]2-[/] Remover Tarefa": RemoverTarefa(projeto); break;
                     case "[cornflowerblue]3-[/] Editar Tarefa Existente": EscolherTarefaExistente(projeto); break;
-                    case "[cornflowerblue]4-[/] Alterar Status do Projeto": AlterarStatusProjeto(projeto); break;
-                    case "[cornflowerblue]5-[/] Alterar Prioridade": AlterarPrioridadeProjeto(projeto); break;
-                    case "[cornflowerblue]6-[/] Atribuir Gestor": AtribuirGestor(projeto); break;
-                    case "[cornflowerblue]7-[/] Remover Gestor": RemoverGestor(projeto); break;
-                    case "[cornflowerblue]8-[/] Finalizar Projeto": FinalizarProjeto(projeto); break;
-                    case "[cornflowerblue]9-[/] Cancelar Projeto": CancelarProjeto(projeto); break;
-                    case "[cornflowerblue]10-[/] [red]Voltar[/]": MenuProjetos(); break;
+                    case "[cornflowerblue]4-[/] Alterar Prioridade": AlterarPrioridadeProjeto(projeto); break;
+                    case "[cornflowerblue]5-[/] Atribuir Gestor": AtribuirGestor(projeto); break;
+                    case "[cornflowerblue]6-[/] Remover Gestor": RemoverGestor(projeto); break;
+                    case "[cornflowerblue]7-[/] Finalizar Projeto": FinalizarProjeto(projeto); break;
+                    case "[cornflowerblue]8-[/] Cancelar Projeto": CancelarProjeto(projeto); break;
+                    case "[red]Voltar[/]": MenuProjetos(); break;
                 }
             }
         }
@@ -431,34 +438,6 @@ namespace SistemaGestaoProjetosETarefas.Views
                         EscolherTarefaExistente(projeto);
                         break;
                     }
-            }
-        }
-
-        private static void AlterarStatusProjeto(Projeto projeto)
-        {
-            while (true)
-            {
-                AnsiConsole.Clear();
-                InformacoesProjeto(projeto);
-                var status = StatusService.ListarStatus();
-                var opcaoStatus = AnsiConsole.Prompt
-                    (
-                        new SelectionPrompt<string>()
-                        .Title("[gold1] Selecione o novo status: [/]")
-                        .AddChoices(status.Keys)
-                        .AddChoices("[red]Voltar[/]")
-                    );
-                if (opcaoStatus == "[red]Voltar[/]")
-                {
-                    ExibirProjeto(projeto);
-                    break; // Se o usuário escolher voltar, sai do método
-                }
-                var statusEscolhido = status[opcaoStatus];
-                projeto.AlterarStatus(statusEscolhido);
-                AnsiConsole.Markup($"[green] Status do projeto alterado com sucesso![/]"); Console.WriteLine("\n");
-                Thread.Sleep(1000);
-                ExibirProjeto(projeto);
-                break;
             }
         }
 
