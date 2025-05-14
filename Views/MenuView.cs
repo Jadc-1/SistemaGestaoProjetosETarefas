@@ -1,5 +1,6 @@
 ﻿using SistemaGestaoProjetosETarefas.Domain;
 using SistemaGestaoProjetosETarefas.Service;
+using SistemaGestaoProjetosETarefas.Services;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,16 @@ namespace SistemaGestaoProjetosETarefas.Views
     {
         public static void MenuPrincipal()
         {
+            
             Departamento departamento = new Departamento("Desenvolvimento");
             Endereco endereco = new Endereco("Rua Treze de Maio","141", "Vinhedo", "SP");
+            Gestor joaog = new Gestor("João", "joaoale.25@gmail.com", "19997580230", DateTime.Now, endereco);
+            GestorService gestorService = new GestorService();
+            gestorService.AdicionarGestor(joaog);
             Funcionario joao = new Funcionario("João", "joaoale.25@gmail.com", "123456789", DateTime.Now, endereco);
             departamento.AdicionarFuncionario(joao);
+            FuncionarioService funcionarioService = new FuncionarioService();
+            funcionarioService.AdicionarFuncionario(joao);
             Projeto projeto = new Projeto("teste", "teste1", DateTime.Now, Domain.Status.Atrasado, 'C');
             ProjetoService projetoService = new ProjetoService();
             Tarefa tarefa = new Tarefa("Tarefa 1", "Descricao da tarefa 1", DateTime.Now, Domain.Status.Atrasado, 'C');
@@ -40,25 +47,26 @@ namespace SistemaGestaoProjetosETarefas.Views
                         .Title("[gold1] Selecione uma opção: [/]")
                         .AddChoices(new[]
                         {
-                            "Gerenciar Projetos",
-                            "Gerenciar Departamentos",
-                            "Gerenciar Usuários",
-                            "Relatórios",
-                            "[red]Sair[/]"
+                            " Gerenciar Projetos",
+                            " Gerenciar Departamentos",
+                            " Gerenciar Usuários",
+                            " Relatórios",
+                            "[red] Sair[/]"
                         })
                     );
 
                 switch (opcao)
                 { // Chamar os métodos para gerencia-los
-                    case "Gerenciar Projetos": ProjetoView.MenuProjetos(); break;
-                    case "Gerenciar Departamentos": Console.WriteLine("Departamentos"); break;
-                    case "Gerenciar Usuários": Console.WriteLine("Usuarios"); break;
-                    case "Relatórios": Console.WriteLine("Relatorio"); break;
-                    case "[red]Sair[/]":
+                    case " Gerenciar Projetos": ProjetoView.MenuProjetos(); break;
+                    case " Gerenciar Departamentos": Console.WriteLine("Departamentos"); break;
+                    case " Gerenciar Usuários": Console.WriteLine("Usuarios"); break;
+                    case " Relatórios": Console.WriteLine("Relatorio"); break;
+                    case "[red] Sair[/]":
                         {
                             AnsiConsole.Clear();
-                            AnsiConsole.MarkupLine("[red]Saindo do sistema...[/]");
+                            AnsiConsole.MarkupLine("[red] Saindo do sistema...[/]");
                             Thread.Sleep(1500);
+                            System.Environment.Exit(0);
                             break;
                         }    
                 }

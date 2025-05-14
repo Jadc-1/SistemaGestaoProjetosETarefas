@@ -54,5 +54,6 @@ namespace SistemaGestaoProjetosETarefas.Service
             }
             return lista;
         }
+
     }
 }

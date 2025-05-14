@@ -30,30 +30,15 @@ namespace SistemaGestaoProjetosETarefas.Services
             }
 
         }
-        public void ListarGestores()
+        public static Dictionary<string, Gestor> ListarGestores()
         {
-            if (gestores != null)
+            var gestorDict = new Dictionary<string, Gestor>();
+            foreach (var gestor in gestores)
             {
-                foreach (var gestor in gestores)
-                {
-                    if (gestor.Ativo != false)
-                    {
-                        Console.WriteLine($"ID: {gestor.IdGestor} \nNome: {gestor.Nome} \nEmail: {gestor.Email} \nTelefone: {gestor.Telefone} \nData de Cadastro: {gestor.DataCadastro.ToString("dd/MM/yyyy")}\n");
-                        Console.WriteLine("(Projetos Gerenciados)");
-                        if (gestor.ProjetosGerenciados != null)
-                        {
-                            foreach (var projeto in gestor.ProjetosGerenciados)
-                            {
-                                Console.WriteLine($" {projeto.CodigoDoProjeto}- Projeto: {projeto.Nome}");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Nenhum projeto associado");
-                        }
-                    }
-                }
+                var chave = $"[cornflowerblue] Gestor: [/] {gestor.Nome}";
+                gestorDict.Add(chave, gestor);
             }
+            return gestorDict;
         }
     }
 }
