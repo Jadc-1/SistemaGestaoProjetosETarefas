@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using SistemaGestaoProjetosETarefas.Domain;
 using SistemaGestaoProjetosETarefas.Services;
+using System.Runtime.CompilerServices;
 
 namespace SistemaGestaoProjetosETarefas.Views
 {
     public class ProjetoView
     {
-        private static readonly Dictionary<string, Projeto> Projetos = ProjetoService.ListarProjetos();
+
 
         public static void MenuProjetos()
         {
@@ -21,17 +22,18 @@ namespace SistemaGestaoProjetosETarefas.Views
             do
             {
                 AnsiConsole.Clear();
-
+                var projetos = ProjetoService.ListarProjetos();
                 AnsiConsole.Write(new Rule("[gold1]Gerenciar Projetos[/]").RuleStyle("grey").Centered());
                 Console.WriteLine();
-                if (Projetos.Count > 0)
+                if (projetos.Count > 0)
                 {
 
                     var opcoes = AnsiConsole.Prompt
                     (
                         new SelectionPrompt<string>()
                         .Title("[gold1] Selecione um Projeto[/]")
-                        .AddChoices(Projetos.Keys)
+                        .AddChoices(projetos.Keys)
+                        .AddChoices("[green] Adicionar Novo Projeto[/]")
                         .AddChoices(voltar)
                     );
                     if (opcoes == voltar)
@@ -39,18 +41,139 @@ namespace SistemaGestaoProjetosETarefas.Views
                         MenuView.MenuPrincipal(); // Se o usuário escolher voltar, sai do loop
                         break; // Se o usuário escolher voltar, sai do loop
                     }
+                    else if(opcoes == "[green] Adicionar Novo Projeto[/]")
+                    {
+                        AdicionarNovoProjeto(); // Chama o método para adicionar um novo projeto
+                    }
                     else
                     {
-                        var projetoEscolhido = Projetos[opcoes]; // A variável projeto recebe o valor do dicionário, onde a chave é o projeto escolhido
+                        var projetoEscolhido = projetos[opcoes]; // A variável projeto recebe o valor do dicionário, onde a chave é o projeto escolhido
                         ExibirProjeto(projetoEscolhido); // Chama o método para exibir o projeto escolhido
                     }
                 }
                 else
                 {
-                    // Fazer interface, caso não tenha nenhum projeto cadastrado!
+                    AnsiConsole.MarkupLine("[red] Nenhum projeto cadastrado![/]");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Thread.Sleep(500);
+                    var opcao = AnsiConsole.Prompt
+                    (
+                        new SelectionPrompt<string>()
+                        .Title("[cadetblue] O que deseja fazer?[/]")
+                        .AddChoices(new[]
+                        {
+                            "[cornflowerblue]1-[/] Adicionar Projeto",
+                            "[red]Voltar[/]"
+                        })
+                    );
+                    switch (opcao)
+                    {
+                        case "[cornflowerblue]1-[/] Adicionar Projeto": AdicionarNovoProjeto(); break;
+                        case "[red]Voltar[/]": MenuView.MenuPrincipal(); break;
+                    }
                 }
             } while (true);
 
+        }
+
+        public static void AdicionarNovoProjeto()
+        {
+            while (true)
+            {
+                AnsiConsole.Clear();
+                AnsiConsole.Write(new Rule("[gold1]Adicionar Novo Projeto[/]").RuleStyle("grey").Centered());
+                Console.WriteLine();
+                var nome = AnsiConsole.Ask<string>(("[cornflowerblue] Nome do Projeto: [/] "));
+                Console.WriteLine();
+                var descricao = AnsiConsole.Ask<string>(("[cornflowerblue] Descrição do Projeto: [/] "));
+                Console.WriteLine();
+                var dataInicio = DateTime.Now;
+                var prioridade = AnsiConsole.Prompt
+                    (
+                        new SelectionPrompt<string>()
+                        .Title("[cornflowerblue] Prioridade da Tarefa: [/] ")
+                        .AddChoices(new[]
+                        {
+                        "[cornflowerblue]1-[/] A",
+                        "[cornflowerblue]2-[/] B",
+                        "[cornflowerblue]3-[/] C",
+                        "[cornflowerblue]4-[/] D"
+                        })
+                    );
+                var prioridadeEscolhida = char.Parse(prioridade.Substring(prioridade.Length - 1, 1)); // Pego apenas a letra da prioridade escolhida
+                AnsiConsole.MarkupLine($" Você selecionou a prioridade [cornflowerblue]{prioridadeEscolhida}[/]");
+                Console.WriteLine();
+                var listarGestores = GestorService.ListarGestores();
+                Gestor? gestorEscolhido = null;
+                if (listarGestores.Count > 0)
+                {
+                    var opcao = AnsiConsole.Prompt
+                        (
+                            new SelectionPrompt<string>()
+                            .Title("[gold1] Deseja adicionar um Gestor?[/]")
+                            .AddChoices(new[] { "[green] Sim[/]", "[red] Não[/]" })
+                        );
+                    if (opcao == "[green] Sim[/]")
+                    {
+                        var gestores = AnsiConsole.Prompt
+                        (
+                            new SelectionPrompt<string>()
+                            .Title("[cornflowerblue] Selecione o gestor: [/]")
+                            .AddChoices(listarGestores.Keys)
+                        );
+                        gestorEscolhido = listarGestores[gestores];
+                        AnsiConsole.MarkupLine($" Você selecionou o gestor [cornflowerblue]{gestorEscolhido.Nome}[/]");
+                    }
+                    Console.WriteLine();
+                    var projeto = ConfirmarProjeto(nome, descricao, dataInicio, prioridadeEscolhida); // Chama o método para confirmar a adição do projeto
+                    projeto.AtribuirGestor(gestorEscolhido!); // Atribui o gestor ao projeto
+                    ProjetoService projetoService = new ProjetoService();
+                    AnsiConsole.MarkupLine($"[green] Projeto {projeto.Nome} Adicionado com sucesso![/]"); Console.WriteLine("\n");
+                    Thread.Sleep(1000);
+                    MenuProjetos(); // Chama o método para exibir o menu de projetos
+                }
+                else
+                {
+                    Console.WriteLine();
+                    var projeto = ConfirmarProjeto(nome, descricao, dataInicio, prioridadeEscolhida); // Chama o método para confirmar a adição do projeto
+                    AnsiConsole.MarkupLine($"[green] Projeto {projeto.Nome} Adicionado com sucesso![/]"); Console.WriteLine("\n");
+                    Thread.Sleep(1000);
+                    MenuProjetos(); // Chama o método para exibir o menu de projetos
+                }
+            }
+        }
+
+        private static Projeto ConfirmarProjeto(string nome, string descricao, DateTime dataInicio, char prioridadeEscolhida)
+        {
+            while (true)
+            {
+                AnsiConsole.Write(new Rule().RuleStyle("grey").LeftJustified());
+                var adicionar = AnsiConsole.Prompt
+                    (
+                        new SelectionPrompt<string>()
+                        .Title("[gold1] Deseja realmente adicionar o projeto?[/]")
+                        .AddChoices(new[]
+                        {
+                        "[green] Confirmar[/]", "[red] Cancelar[/]"
+                        })
+                    );
+
+                if (adicionar == "[green] Confirmar[/]")
+                {
+                    Projeto projeto = new Projeto(nome, descricao, dataInicio, prioridadeEscolhida);
+                    ProjetoService projetoService = new ProjetoService();
+                    projetoService.AdicionarProjeto(projeto); // Chama o método para adicionar o projeto
+                    return projeto;
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[red] Projeto não adicionado![/]"); Console.WriteLine("\n");
+                    Thread.Sleep(1000);
+                    MenuProjetos();
+                }
+                return null!; // Retorna nulo se o projeto não for adicionado
+            }
         }
 
         public static void ExibirProjeto(Projeto projeto)
@@ -63,19 +186,17 @@ namespace SistemaGestaoProjetosETarefas.Views
             }
             else
             {
-                AnsiConsole.MarkupLine("[red]Nenhuma tarefa cadastrada para este projeto.[/]");
-                Console.ReadKey();
+                AnsiConsole.MarkupLine("[red] Nenhuma tarefa cadastrada para este projeto.[/]");
+                Console.WriteLine();
+                Console.WriteLine();
+                MenuProjetoSemTarefas(projeto);
             }
             Console.WriteLine();
         }
 
         private static void InformacoesProjeto(Projeto projeto)
         {
-            if(projeto.Tarefas!.Count == 0)
-            {
-                projeto.StatusProjeto = Domain.Status.Pendente;
-            }
-            else if(projeto.Tarefas!.Count > 0 && projeto.StatusProjeto != Domain.Status.Concluido && projeto.StatusProjeto != Domain.Status.Cancelado)
+            if(projeto.StatusProjeto != Domain.Status.Concluido && projeto.StatusProjeto != Domain.Status.Cancelado)
             {
                 projeto.StatusProjeto = Domain.Status.EmAndamento;
             }
@@ -92,6 +213,39 @@ namespace SistemaGestaoProjetosETarefas.Views
             Console.WriteLine();
             AnsiConsole.Write(new Rule().RuleStyle("grey").LeftJustified());
             Console.WriteLine();
+        }
+
+        private static void MenuProjetoSemTarefas(Projeto projeto)
+        {
+            if (projeto.StatusProjeto == Domain.Status.Cancelado || projeto.StatusProjeto == Domain.Status.Concluido)
+            {
+                AnsiConsole.MarkupLine("[red] Projeto cancelado ou concluído! Não é possível adicionar ou editar tarefas.[/]");
+                Console.ReadKey();
+                MenuProjetos();
+                return;
+            }
+            var opcao = AnsiConsole.Prompt
+                (
+                  new SelectionPrompt<string>()
+                  .Title(" [cadetblue]O que deseja fazer?[/]")
+                  .AddChoices(new[]
+                  {
+                      "[cornflowerblue]1-[/] Adicionar Tarefa",
+                      "[cornflowerblue]2-[/] Alterar Prioridade",
+                      "[cornflowerblue]3-[/] Atribuir Gestor",
+                      "[cornflowerblue]4-[/] Cancelar Projeto",
+                      "[red]Voltar[/] "
+                  })
+                );
+
+            switch (opcao)
+            {
+                case "[cornflowerblue]1-[/] Adicionar Tarefa": AdicionarNovaTarefa(projeto); break;
+                case "[cornflowerblue]2-[/] Alterar Prioridade": AlterarPrioridadeProjeto(projeto); break;
+                case "[cornflowerblue]3-[/] Atribuir Gestor": AtribuirGestor(projeto); break;
+                case "[cornflowerblue]4-[/] Cancelar Projeto": CancelarProjeto(projeto); break;
+                case "[red]Voltar[/]": MenuProjetos(); break;
+            }
         }
 
         private static void CriarTabelaTarefas(Projeto projeto)
