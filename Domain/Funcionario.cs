@@ -8,7 +8,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Funcionario : Usuario
     {
-        private static int _IdIncremento = 0;
+        private static int _IdIncremento = 1;
         public int IdFuncionario { get; private set; }
         public List<Tarefa>? Tarefas { get; set; }
         public Departamento? Departamento { get; set; }

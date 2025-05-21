@@ -35,7 +35,7 @@ namespace SistemaGestaoProjetosETarefas.Services
             var gestorDict = new Dictionary<string, Gestor>();
             foreach (var gestor in gestores)
             {
-                var chave = $"[cornflowerblue] Gestor: [/] {gestor.Nome}";
+                var chave = $"[cornflowerblue] Gestor {gestor.IdGestor}: [/] {gestor.Nome}";
                 gestorDict.Add(chave, gestor);
             }
             return gestorDict;

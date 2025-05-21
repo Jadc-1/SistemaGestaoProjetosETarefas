@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Departamento
     {
-        private static int _IdIncremento = 0;
+        private static int _IdIncremento = 1;
         public int IdDept { get; private set; }
         public string? NomeDept { get; set; }
         public List<Funcionario>? Funcionarios { get; set; }

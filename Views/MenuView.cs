@@ -17,6 +17,8 @@ namespace SistemaGestaoProjetosETarefas.Views
         {
             
             Departamento departamento = new Departamento("Desenvolvimento");
+            DepartamentoService departamentoService = new DepartamentoService();
+            departamentoService.AdicionarDepartamento(departamento);
             Endereco endereco = new Endereco("Rua Treze de Maio","141", "Vinhedo", "SP");
             Gestor joaog = new Gestor("João", "joaoale.25@gmail.com", "19997580230", DateTime.Now, endereco);
             GestorService gestorService = new GestorService();
@@ -58,7 +60,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                 switch (opcao)
                 { // Chamar os métodos para gerencia-los
                     case " Gerenciar Projetos": ProjetoView.MenuProjetos(); break;
-                    case " Gerenciar Departamentos": Console.WriteLine("Departamentos"); break;
+                    case " Gerenciar Departamentos": DepartamentoView.MenuDepartamentos(); break;
                     case " Gerenciar Usuários": Console.WriteLine("Usuarios"); break;
                     case " Relatórios": Console.WriteLine("Relatorio"); break;
                     case "[red] Sair[/]":

@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Usuario
     {
-        private static int _proximoId = 0; // Variável estática para gerar IDs únicos
+        private static int _proximoId = 1; // Variável estática para gerar IDs únicos
         public int IdDoUsuario { get; private set; }
         public string? Nome { get; set; }
         public string? Email { get; set; } 

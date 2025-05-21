@@ -16,7 +16,7 @@ namespace SistemaGestaoProjetosETarefas.Service
             var departamentos = new Dictionary<string, Departamento>(); // Dicionário para armazenar as opções de departamentos ja criados na lista do DepartamentoService
             foreach (var departamento in _departamentos)
             {
-                var chave = $"Departamento: {departamento}";
+                var chave = $"[cornflowerblue]Departamento [/]{departamento.IdDept}: {departamento.NomeDept}";
                 departamentos.Add(chave, departamento); // Adiciona o departamento ao dicionário
             }
             return departamentos;
