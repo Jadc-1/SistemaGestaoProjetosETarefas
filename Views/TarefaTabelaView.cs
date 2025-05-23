@@ -77,11 +77,11 @@ namespace SistemaGestaoProjetosETarefas.Views
                     case "[cornflowerblue]1-[/] Adicionar Tarefa": TarefaCrudView.AdicionarNovaTarefa(projeto); break;
                     case "[cornflowerblue]2-[/] Remover Tarefa": TarefaCrudView.RemoverTarefa(projeto); break;
                     case "[cornflowerblue]3-[/] Editar Tarefa Existente": TarefaCrudView.EscolherTarefaExistente(projeto); break;
-                    case "[cornflowerblue]4-[/] Alterar Prioridade": ProjetoAdministrativoView.AlterarPrioridadeProjeto(projeto); break;
-                    case "[cornflowerblue]5-[/] Atribuir Gestor": ProjetoAdministrativoView.AtribuirGestor(projeto); break;
-                    case "[cornflowerblue]6-[/] Remover Gestor": ProjetoAdministrativoView.RemoverGestor(projeto); break;
-                    case "[cornflowerblue]7-[/] Finalizar Projeto": ProjetoAdministrativoView.FinalizarProjeto(projeto); break;
-                    case "[cornflowerblue]8-[/] Cancelar Projeto": ProjetoAdministrativoView.CancelarProjeto(projeto); break;
+                    case "[cornflowerblue]4-[/] Alterar Prioridade": ProjetoAdmView.AlterarPrioridadeProjeto(projeto); break;
+                    case "[cornflowerblue]5-[/] Atribuir Gestor": ProjetoAdmView.AtribuirGestor(projeto); break;
+                    case "[cornflowerblue]6-[/] Remover Gestor": ProjetoAdmView.RemoverGestor(projeto); break;
+                    case "[cornflowerblue]7-[/] Finalizar Projeto": ProjetoAdmView.FinalizarProjeto(projeto); break;
+                    case "[cornflowerblue]8-[/] Cancelar Projeto": ProjetoAdmView.CancelarProjeto(projeto); break;
                     case "[red]Voltar[/]": ProjetoMenuView.MenuProjetos(); break;
                 }
             }

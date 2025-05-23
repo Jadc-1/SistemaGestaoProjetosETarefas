@@ -262,6 +262,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                             );
 
                             var funcEscolhido = listaFunc[funcionarios];
+                            funcEscolhido.Tarefas!.Add(tarefa);
                             tarefa.FuncionarioDelegado = funcEscolhido;
                             AnsiConsole.MarkupLine($"[green] Funcionário delegado alterado com sucesso![/]"); Console.WriteLine("\n");
                             Thread.Sleep(1000);

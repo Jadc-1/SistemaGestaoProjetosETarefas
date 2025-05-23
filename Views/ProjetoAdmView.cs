@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SistemaGestaoProjetosETarefas.Views
 {
-    public class ProjetoAdministrativoView
+    public class ProjetoAdmView
     {
         public static void AtribuirGestor(Projeto projeto)
         {

@@ -33,7 +33,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                     if (opcoes == voltar)
                     {
-                        MenuPrincipalView.MenuPrincipal(); // Se o usuário escolher voltar, sai do loop
+                        MenuView.MenuPrincipal(); // Se o usuário escolher voltar, sai do loop
                         break; // Se o usuário escolher voltar, sai do loop
                     }
                     else if (opcoes == "[green] Adicionar Novo Projeto[/]")
@@ -65,7 +65,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     switch (opcao)
                     {
                         case "[cornflowerblue]1-[/] Adicionar Projeto": ProjetoCadastroView.AdicionarNovoProjeto(); break;
-                        case "[red]Voltar[/]": MenuPrincipalView.MenuPrincipal(); break;
+                        case "[red]Voltar[/]": MenuView.MenuPrincipal(); break;
                     }
                 }
             } while (true);
@@ -97,9 +97,9 @@ namespace SistemaGestaoProjetosETarefas.Views
             switch (opcao)
             {
                 case "[cornflowerblue]1-[/] Adicionar Tarefa": TarefaCrudView.AdicionarNovaTarefa(projeto); break;
-                case "[cornflowerblue]2-[/] Alterar Prioridade": ProjetoAdministrativoView.AlterarPrioridadeProjeto(projeto); break;
-                case "[cornflowerblue]3-[/] Atribuir Gestor": ProjetoAdministrativoView.AtribuirGestor(projeto); break;
-                case "[cornflowerblue]4-[/] Cancelar Projeto": ProjetoAdministrativoView.CancelarProjeto(projeto); break;
+                case "[cornflowerblue]2-[/] Alterar Prioridade": ProjetoAdmView.AlterarPrioridadeProjeto(projeto); break;
+                case "[cornflowerblue]3-[/] Atribuir Gestor": ProjetoAdmView.AtribuirGestor(projeto); break;
+                case "[cornflowerblue]4-[/] Cancelar Projeto": ProjetoAdmView.CancelarProjeto(projeto); break;
                 case "[red]Voltar[/]": MenuProjetos(); break;
             }
         }
@@ -111,7 +111,7 @@ namespace SistemaGestaoProjetosETarefas.Views
             }
 
             AnsiConsole.Clear();
-            AnsiConsole.Write(new Rule($"[gold1]{projeto.Nome}[/]").RuleStyle("grey").Centered());
+            AnsiConsole.Write(new Rule($"[gold1]{projeto.Nome}[/]").RuleStyle("grey").LeftJustified());
             Console.WriteLine();
             AnsiConsole.MarkupLine($"[cornflowerblue] Desc: [/] {projeto.Desc}");
             AnsiConsole.MarkupLine($"[cornflowerblue] Data de Início: [/] {projeto.DataInicio.ToString("dd/MM/yyyy")}");

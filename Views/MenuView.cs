@@ -11,15 +11,14 @@ using System.Threading.Tasks;
 
 namespace SistemaGestaoProjetosETarefas.Views
 {
-    public class MenuPrincipalView
+    public class MenuView
     {
         public static void MenuPrincipal()
         {
-            
             Departamento departamento = new Departamento("Desenvolvimento");
             DepartamentoService departamentoService = new DepartamentoService();
             departamentoService.AdicionarDepartamento(departamento);
-            Endereco endereco = new Endereco("Rua Treze de Maio","141", "Vinhedo", "SP");
+            Endereco endereco = new Endereco("Rua Treze de Maio", "141", "Vinhedo", "SP");
             Gestor joaog = new Gestor("João", "joaoale.25@gmail.com", "19997580230", DateTime.Now, endereco);
             GestorService gestorService = new GestorService();
             gestorService.AdicionarGestor(joaog);
@@ -32,11 +31,14 @@ namespace SistemaGestaoProjetosETarefas.Views
             Tarefa tarefa = new Tarefa("Tarefa 1", "Descricao da tarefa 1", DateTime.Now, Domain.Status.Atrasado, 'C');
             projeto.AdicionarTarefa(tarefa);
             tarefa.AtribuirFuncionario(joao);
+            joao.Tarefas!.Add(tarefa);
             Tarefa tarefa1 = new Tarefa("Tarefa 2", "Descricao da tarefa 2", DateTime.Now, Domain.Status.Atrasado, 'C');
             projeto.AdicionarTarefa(tarefa1);
+            joao.Tarefas!.Add(tarefa1);
             projetoService.AdicionarProjeto(projeto);
             Projeto projeto1 = new Projeto("teste2", "teste3", DateTime.Now, 'C');
             projetoService.AdicionarProjeto(projeto1);
+
             string opcao;
             do
             {
@@ -60,8 +62,8 @@ namespace SistemaGestaoProjetosETarefas.Views
                 switch (opcao)
                 { // Chamar os métodos para gerencia-los
                     case " Gerenciar Projetos": ProjetoMenuView.MenuProjetos(); break;
-                    case " Gerenciar Departamentos": DepartamentoMenuView.MenuDepartamentos(); break;
-                    case " Gerenciar Usuários": Console.WriteLine("Usuarios"); break;
+                    case " Gerenciar Departamentos": DeptMenuView.MenuDepartamentos(); break;
+                    case " Gerenciar Usuários": UsuarioMenuView.MenuUsuario(); break;
                     case " Relatórios": Console.WriteLine("Relatorio"); break;
                     case "[red] Sair[/]":
                         {

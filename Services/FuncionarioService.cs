@@ -10,7 +10,7 @@ namespace SistemaGestaoProjetosETarefas.Services
     public class FuncionarioService
     {
         private static readonly List<Funcionario> funcionarios = new List<Funcionario>();
-        
+
         public void AdicionarFuncionario(Funcionario funcionario)
         {
             funcionarios.Add(funcionario);
@@ -32,10 +32,20 @@ namespace SistemaGestaoProjetosETarefas.Services
             var dicionarioFunc = new Dictionary<string, Funcionario>();
             foreach (var funcionario in funcionarios)
             {
-                var chave = $"[cornflowerblue] Funcionário: {funcionario.Nome}";
+                var chave = $"[cornflowerblue] Funcionário {funcionario.IdFuncionario.ToString()}: {funcionario.Nome}";
                 dicionarioFunc.Add(chave, funcionario);
             }
             return dicionarioFunc;
+        }
+
+        public static List<Tarefa> ListarTarefasFuncionario(Funcionario funcionario)
+        {
+            var tarefasFunc = new List<Tarefa>();
+            foreach(var tarefa in funcionario.Tarefas!)
+            {
+                tarefasFunc.Add(tarefa);
+            }
+            return tarefasFunc;
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace SistemaGestaoProjetosETarefas.Views
 {
-    public class DepartamentoMenuView
+    public class DeptMenuView
     {
         public static void MenuDepartamentos()
         {
@@ -32,11 +32,11 @@ namespace SistemaGestaoProjetosETarefas.Views
                 );
             switch (opcao)
             {
-                case "[cornflowerblue]1- [/]Listar Departamentos": DepartamentoListagemView.ListarDepartamentos(); break;
-                case "[cornflowerblue]2- [/]Adicionar Departamento": DepartamentoCrudView.AdicionarDepartamento(); break;
-                case "[cornflowerblue]3- [/]Editar Departamento": DepartamentoCrudView.EditarDepartamento(); break;
-                case "[cornflowerblue]4- [/]Desativar Departamento": DepartamentoCrudView.DesativarDepartamento(); break;
-                case "[red]Voltar[/]": MenuPrincipalView.MenuPrincipal(); break;
+                case "[cornflowerblue]1- [/]Listar Departamentos": DeptListagemView.ListarDepartamentos(); break;
+                case "[cornflowerblue]2- [/]Adicionar Departamento": DeptCrudView.AdicionarDepartamento(); break;
+                case "[cornflowerblue]3- [/]Editar Departamento": DeptCrudView.EditarDepartamento(); break;
+                case "[cornflowerblue]4- [/]Desativar Departamento": DeptCrudView.DesativarDepartamento(); break;
+                case "[red]Voltar[/]": MenuView.MenuPrincipal(); break;
             }
 
             Console.ReadKey();

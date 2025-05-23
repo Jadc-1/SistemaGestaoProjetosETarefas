@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SistemaGestaoProjetosETarefas.Views
 {
-    public class DepartamentoListagemView
+    public class DeptListagemView
     {
         public static void ListarDepartamentos()
         {
@@ -18,7 +18,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                 AnsiConsole.Clear();
                 DepartamentoService departamentoService = new DepartamentoService();
                 var departamentos = departamentoService.ListarDepartamentos();
-                AnsiConsole.Write(new Rule("[gold1 bold]Listar Departamentos[/]").RuleStyle("grey").Centered());
+                AnsiConsole.Write(new Rule("[gold1 bold]Listar Departamentos[/]").RuleStyle("grey").LeftJustified());
                 Console.WriteLine();
                 TabelaDepartamentos();
                 Console.WriteLine();
@@ -39,14 +39,14 @@ namespace SistemaGestaoProjetosETarefas.Views
                     switch (opcao)
                     {
                         case "[cornflowerblue]1- Listar Funcionários do Departamento[/]": ListarFuncionarioDept(); break;
-                        case "[red]Voltar[/]": DepartamentoMenuView.MenuDepartamentos(); break;
+                        case "[red]Voltar[/]": DeptMenuView.MenuDepartamentos(); break;
                     }
                 }
                 else
                 {
                     AnsiConsole.Markup("[grey] Pressiona qualquer tecla para continuar..[/]");
                     Console.ReadKey();
-                    DepartamentoMenuView.MenuDepartamentos();
+                    DeptMenuView.MenuDepartamentos();
                 }
             }
         }
@@ -59,7 +59,6 @@ namespace SistemaGestaoProjetosETarefas.Views
             {
                 AnsiConsole.MarkupLine("[red] Nenhum departamento encontrado.[/]");
                 Console.WriteLine();
-                Console.WriteLine();
             }
             else
             {
@@ -70,10 +69,11 @@ namespace SistemaGestaoProjetosETarefas.Views
                 table.AddColumn("[cadetblue]Funcionários[/]");
                 foreach (var departamento in departamentos)
                 {
+                    var ativo = departamento.Value.Ativo.ToString() == "True" ? "[green]Ativo[/]" : "[red]Inativo[/]"; // Verifica se o departamento está ativo ou inativo
                     table.AddRow(
                         departamento.Value.IdDept.ToString(), // Pego o value do dicionario que é um objeto do tipo Departamento e seleciono o ID
                         departamento.Value.NomeDept!,
-                        departamento.Value.Ativo.ToString(),
+                        ativo,
                         departamento.Value.Funcionarios!.Count.ToString()
                         );
                 }
@@ -104,7 +104,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                 if (opcao == "[red]Voltar[/]")
                 {
-                    DepartamentoMenuView.MenuDepartamentos();
+                    DeptMenuView.MenuDepartamentos();
                 }
                 else
                 {
@@ -135,7 +135,7 @@ namespace SistemaGestaoProjetosETarefas.Views
             while (true)
             {
                 AnsiConsole.Clear();
-                AnsiConsole.Write(new Rule($"[gold1 bold]Departamento {departamento.NomeDept}[/]").RuleStyle("grey").Centered());
+                AnsiConsole.Write(new Rule($"[gold1 bold]Departamento {departamento.NomeDept}[/]").RuleStyle("grey").LeftJustified());
                 Console.WriteLine();
                 var table = new Table();
                 table.AddColumn("[cadetblue]ID[/]");

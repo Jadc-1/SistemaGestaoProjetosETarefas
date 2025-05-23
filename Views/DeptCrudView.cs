@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SistemaGestaoProjetosETarefas.Views
 {
-    public class DepartamentoCrudView
+    public class DeptCrudView
     {
         public static void AdicionarDepartamento()
         {
@@ -31,7 +31,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                 {
                     AnsiConsole.MarkupLine("[red] Ação cancelada![/]");
                     Thread.Sleep(700);
-                    DepartamentoMenuView.MenuDepartamentos();
+                    DeptMenuView.MenuDepartamentos();
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                 }
                 AnsiConsole.MarkupLine($"[green] Departamento {nome} adicionado com sucesso![/]");
                 Thread.Sleep(500);
-                DepartamentoMenuView.MenuDepartamentos();
+                DeptMenuView.MenuDepartamentos();
             }
         }
 
@@ -65,7 +65,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                 if (opcao == "[red]Voltar[/]")
                 {
-                    DepartamentoMenuView.MenuDepartamentos();
+                    DeptMenuView.MenuDepartamentos();
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     Console.WriteLine();
                     AnsiConsole.MarkupLine($"[green] Departamento editado com sucesso![/]");
                     Thread.Sleep(500);
-                    DepartamentoMenuView.MenuDepartamentos();
+                    DeptMenuView.MenuDepartamentos();
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                 if (opcao == "[red]Voltar[/]")
                 {
-                    DepartamentoMenuView.MenuDepartamentos();
+                    DeptMenuView.MenuDepartamentos();
                 }
                 else
                 {
@@ -119,13 +119,13 @@ namespace SistemaGestaoProjetosETarefas.Views
                         departamentoEscolhido.Ativo = false;
                         AnsiConsole.MarkupLine($"[green] Departamento {departamentoEscolhido.NomeDept} desativado com sucesso![/]");
                         Thread.Sleep(500);
-                        DepartamentoMenuView.MenuDepartamentos();
+                        DeptMenuView.MenuDepartamentos();
                     }
                     else
                     {
                         AnsiConsole.MarkupLine("[red] Ação cancelada![/]");
                         Thread.Sleep(700);
-                        DepartamentoMenuView.MenuDepartamentos();
+                        DeptMenuView.MenuDepartamentos();
                     }
                 }
             }
