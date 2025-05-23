@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaGestaoProjetosETarefas.Domain;
@@ -20,7 +21,7 @@ namespace SistemaGestaoProjetosETarefas.Services
         public void DesativarGestor(int id)
         {
             var gestor = gestores.FirstOrDefault(g => g.IdGestor == id);
-            if(gestor != null)
+            if (gestor != null)
             {
                 gestor.Desativar(gestor);
             }
@@ -39,6 +40,16 @@ namespace SistemaGestaoProjetosETarefas.Services
                 gestorDict.Add(chave, gestor);
             }
             return gestorDict;
+        }
+
+        public static List<Projeto> ListarProjetosGestor(Gestor gestor)
+        {
+            var projetosGestor = new List<Projeto>();
+            foreach (var tarefa in gestor.ProjetosGerenciados)
+            {
+                projetosGestor.Add(tarefa);
+            }
+            return projetosGestor;
         }
     }
 }

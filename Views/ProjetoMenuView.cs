@@ -105,10 +105,6 @@ namespace SistemaGestaoProjetosETarefas.Views
         }
         public static void InformacoesProjeto(Projeto projeto)
         {
-            if (projeto.StatusProjeto != Domain.Status.Concluido && projeto.StatusProjeto != Domain.Status.Cancelado)
-            {
-                projeto.StatusProjeto = Domain.Status.EmAndamento;
-            }
 
             AnsiConsole.Clear();
             AnsiConsole.Write(new Rule($"[gold1]{projeto.Nome}[/]").RuleStyle("grey").LeftJustified());

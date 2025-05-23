@@ -59,10 +59,12 @@ namespace SistemaGestaoProjetosETarefas.Views
                         );
                         gestorEscolhido = listarGestores[gestores];
                         AnsiConsole.MarkupLine($" Você selecionou o gestor [cornflowerblue]{gestorEscolhido.Nome}[/]");
+                       
                     }
                     Console.WriteLine();
                     var projeto = ConfirmarProjeto(nome, descricao, dataInicio, prioridadeEscolhida); // Chama o método para confirmar a adição do projeto
                     projeto.AtribuirGestor(gestorEscolhido!); // Atribui o gestor ao projeto
+                    gestorEscolhido!.ProjetosGerenciados.Add(projeto); // Adiciona o projeto à lista de projetos do gestor
                     ProjetoService projetoService = new ProjetoService();
                     AnsiConsole.MarkupLine($"[green] Projeto {projeto.Nome} Adicionado com sucesso![/]"); Console.WriteLine("\n");
                     Thread.Sleep(1000);

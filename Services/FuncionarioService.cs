@@ -32,7 +32,7 @@ namespace SistemaGestaoProjetosETarefas.Services
             var dicionarioFunc = new Dictionary<string, Funcionario>();
             foreach (var funcionario in funcionarios)
             {
-                var chave = $"[cornflowerblue] Funcionário {funcionario.IdFuncionario.ToString()}: {funcionario.Nome}";
+                var chave = $"[cornflowerblue] Funcionário {funcionario.IdFuncionario}[/]: {funcionario.Nome}";
                 dicionarioFunc.Add(chave, funcionario);
             }
             return dicionarioFunc;

@@ -28,6 +28,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
             this.Desc = desc;
             this.Tarefas = new List<Tarefa>();
             this.StatusTarefas = new List<Status>();
+            this.StatusProjeto = Status.EmAndamento;
             this.DataInicio = dataInicio;
             this.Prioridade = prioridade;
         }

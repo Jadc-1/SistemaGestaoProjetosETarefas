@@ -27,8 +27,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     "[cornflowerblue]3 -[/] Adicionar novo usuário",
                     "[cornflowerblue]4 -[/] Editar usuário",
                     "[cornflowerblue]5 -[/] Desativar usuário",
-                    "[cornflowerblue]6 -[/] Alterar tipo (Funcionario/Gestor)",
-                    "[cornflowerblue]7 -[/] Alterar departamento do usuário",
+                    "[cornflowerblue]6 -[/] Alterar departamento do usuário",
                     "[red]Voltar[/]"
                     })
                 );
@@ -36,12 +35,11 @@ namespace SistemaGestaoProjetosETarefas.Views
                 switch (opcao)
                 {
                     case "[cornflowerblue]1 -[/] Listar Funcionários": UsuarioListarView.ListarFuncionarios(); break;
-                    case "[cornflowerblue]2 -[/] Listar Gestores": break;
-                    case "[cornflowerblue]3 -[/] Adicionar novo usuário": break;
-                    case "[cornflowerblue]4 -[/] Editar usuário": break;
-                    case "[cornflowerblue]5 -[/] Desativar usuário": break;
-                    case "[cornflowerblue]6 -[/] Alterar tipo (Funcionario/Gestor)": break;
-                    case "[cornflowerblue]7 -[/] Alterar departamento do usuário": break;
+                    case "[cornflowerblue]2 -[/] Listar Gestores": UsuarioListarView.ListarGestores(); break;
+                    case "[cornflowerblue]3 -[/] Adicionar novo usuário": UsuarioCrudView.AdicionarNovoUsuario(); break;
+                    case "[cornflowerblue]4 -[/] Editar usuário": UsuarioCrudView.EditarUsuario(); break;
+                    case "[cornflowerblue]5 -[/] Desativar usuário": UsuarioCrudView.DesativarUsuario(); break;
+                    case "[cornflowerblue]6 -[/] Alterar departamento do usuário": UsuarioCrudView.AlterarDepartamentoUsuario(); break;
                     case "[red]Voltar[/]": MenuView.MenuPrincipal(); break;
                 }
             }

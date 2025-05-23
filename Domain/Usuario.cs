@@ -17,7 +17,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public DateTime DataCadastro { get; set; }
         public Endereco? Endereco { get; set; } // Propriedade para armazenar o endereço do usuário
         public bool Ativo { get; set; } = true; // Propriedade para indicar se o usuário está ativo ou não
-
+        
 
         public Usuario (string nome, string email, string telefone, DateTime dataCadastro, Endereco? endereco)
         {
