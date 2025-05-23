@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SistemaGestaoProjetosETarefas.Views
 {
-    public class MenuView
+    public class MenuPrincipalView
     {
         public static void MenuPrincipal()
         {
@@ -59,8 +59,8 @@ namespace SistemaGestaoProjetosETarefas.Views
 
                 switch (opcao)
                 { // Chamar os métodos para gerencia-los
-                    case " Gerenciar Projetos": ProjetoView.MenuProjetos(); break;
-                    case " Gerenciar Departamentos": DepartamentoView.MenuDepartamentos(); break;
+                    case " Gerenciar Projetos": ProjetoMenuView.MenuProjetos(); break;
+                    case " Gerenciar Departamentos": DepartamentoMenuView.MenuDepartamentos(); break;
                     case " Gerenciar Usuários": Console.WriteLine("Usuarios"); break;
                     case " Relatórios": Console.WriteLine("Relatorio"); break;
                     case "[red] Sair[/]":
