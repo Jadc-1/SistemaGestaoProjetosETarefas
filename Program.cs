@@ -8,7 +8,7 @@ namespace SistemaGestaoProjetosETarefas
     {
         static void Main(string[] args)
         {
-            MenuView.MenuPrincipal().Wait();
+              MenuView.MenuPrincipal().Wait();
         }
     }
 }

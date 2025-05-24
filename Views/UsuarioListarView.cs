@@ -164,7 +164,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                         funcionario.Value.Email!,
                         funcionario.Value.Telefone!,
                         funcionario.Value.DataCadastro.ToString("dd/MM/yyyy"),
-                        funcionario.Value.Endereco!.ToString(),
+                        funcionario.Value.Endereco!.ToString()!,
                         departamento,
                         ativo
                     );
@@ -242,7 +242,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                         gestor.Value.Email!,
                         gestor.Value.Telefone!,
                         gestor.Value.DataCadastro.ToString("dd/MM/yyyy"),
-                        gestor.Value.Endereco!.ToString(),
+                        gestor.Value.Endereco!.ToString()!,
                         ativo
                     );
             }
@@ -300,7 +300,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                         usuario.Value.Email!,
                         usuario.Value.Telefone!,
                         usuario.Value.DataCadastro.ToString("dd/MM/yyyy"),
-                        usuario.Value.Endereco!.ToString(),
+                        usuario.Value.Endereco!.ToString()!,
                         ativo,
                         tipo
                     );

@@ -12,6 +12,61 @@ namespace SistemaGestaoProjetosETarefas.Views
 {
     public class TarefaCrudView
     {
+
+        public static async Task MenuAdicionarTarefa(Projeto projeto)
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(new Rule($"[gold1]Adicicio Tarefas - Projeto {projeto.Nome}[/]"));
+            Console.WriteLine();
+            var opcao = AnsiConsole.Prompt
+                (
+                    new SelectionPrompt<string>()
+                    .Title("[gold1] Como você deseja adicionar tarefas? [/] ")
+                    .AddChoices(new[]
+                    {
+                        "[cornflowerblue]1-[/] Adicionar tarefa manualmente",
+                        "[cornflowerblue]2-[/] Adicionar tarefas com IA",
+                        "[red]Voltar[/]"
+                    })
+                );
+            switch (opcao)
+            {
+                case "[cornflowerblue]1-[/] Adicionar tarefa manualmente": AdicionarNovaTarefa(projeto); break;
+                case "[cornflowerblue]2-[/] Adicionar tarefas com IA": await AdicionarTarefasComIA(projeto); break;
+                case "[red]Voltar[/]": ProjetoMenuView.ExibirProjeto(projeto); break;
+            }
+
+        }
+
+        public static async Task AdicionarTarefasComIA(Projeto projeto)
+        {
+            while (true)
+            {
+                Console.Clear();
+                AnsiConsole.Write(new Rule($"[gold1]Adicionar tarefas com IA - Projeto {projeto.Nome}[/]"));
+                Console.WriteLine();
+                var tarefasGeradas = await AnsiConsole.Status()
+                    .Spinner(Spinner.Known.Dots)
+                    .StartAsync(" Adicionando tarefas com IA...", async ctx =>
+                    {
+                        ctx.SpinnerStyle("green");
+                        return await TarefasIAService.CriarTarefasIAAsync(projeto);
+                    });
+
+                foreach (var tarefa in tarefasGeradas)
+                {
+                    tarefa.StatusTarefa = Domain.Status.Pendente;
+                    tarefa.DataInicio = DateTime.Now;
+                    projeto.AdicionarTarefa(tarefa);
+                }
+                AnsiConsole.MarkupLine($"[green] Tarefas adicionadas com sucesso![/]"); Console.WriteLine("\n");
+                AnsiConsole.Markup("[grey] Pressione qualquer tecla para continuar...[/]");
+                Console.ReadKey();
+                break;
+            }
+
+        }
+
         public static void AdicionarNovaTarefa(Projeto projeto)
         {
             while (true)

@@ -22,6 +22,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                 AnsiConsole.Write(new Rule("[gold1]Gerar relatório inteligente em PDF[/]").RuleStyle("grey").Centered());
                 if (projetos.Count == 0)
                 {
+                    Console.WriteLine();
                     AnsiConsole.MarkupLine("[red] Nenhum projeto cadastrado![/]");
                     Console.WriteLine();
                     Console.WriteLine();
@@ -38,8 +39,8 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                     switch (escolher)
                     {
-                        case "[cornflowerblue]1-[/] Adicionar Projeto": ProjetoCadastroView.AdicionarNovoProjeto(); break; ;
-                        case "[red]Voltar[/]": return;
+                        case "[cornflowerblue]1-[/] Adicionar Projeto": ProjetoCadastroView.AdicionarNovoProjeto(); break; 
+                        case "[red]Voltar[/]": await MenuView.MenuPrincipal(); break;
                     }
                 }
                 var opcao = AnsiConsole.Prompt
@@ -54,7 +55,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                 if (opcao == "[red] Voltar[/]")
                 {
-                    return;
+                    await MenuView.MenuPrincipal();
                 }
                 else
                 {

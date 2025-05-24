@@ -96,7 +96,7 @@ namespace SistemaGestaoProjetosETarefas.Views
 
             switch (opcao)
             {
-                case "[cornflowerblue]1-[/] Adicionar Tarefa": TarefaCrudView.AdicionarNovaTarefa(projeto); break;
+                case "[cornflowerblue]1-[/] Adicionar Tarefa": TarefaCrudView.MenuAdicionarTarefa(projeto).Wait(); break;
                 case "[cornflowerblue]2-[/] Alterar Prioridade": ProjetoAdmView.AlterarPrioridadeProjeto(projeto); break;
                 case "[cornflowerblue]3-[/] Atribuir Gestor": ProjetoAdmView.AtribuirGestor(projeto); break;
                 case "[cornflowerblue]4-[/] Cancelar Projeto": ProjetoAdmView.CancelarProjeto(projeto); break;
