@@ -36,7 +36,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                 case "[cornflowerblue]2- [/]Adicionar Departamento": DeptCrudView.AdicionarDepartamento(); break;
                 case "[cornflowerblue]3- [/]Editar Departamento": DeptCrudView.EditarDepartamento(); break;
                 case "[cornflowerblue]4- [/]Desativar Departamento": DeptCrudView.DesativarDepartamento(); break;
-                case "[red]Voltar[/]": MenuView.MenuPrincipal(); break;
+                case "[red]Voltar[/]": MenuView.MenuPrincipal().Wait(); break;
             }
 
             Console.ReadKey();

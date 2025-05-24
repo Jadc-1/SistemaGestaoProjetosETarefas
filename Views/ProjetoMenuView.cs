@@ -33,7 +33,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                     if (opcoes == voltar)
                     {
-                        MenuView.MenuPrincipal(); // Se o usuário escolher voltar, sai do loop
+                        MenuView.MenuPrincipal().Wait(); // Se o usuário escolher voltar, sai do loop
                         break; // Se o usuário escolher voltar, sai do loop
                     }
                     else if (opcoes == "[green] Adicionar Novo Projeto[/]")
@@ -65,7 +65,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     switch (opcao)
                     {
                         case "[cornflowerblue]1-[/] Adicionar Projeto": ProjetoCadastroView.AdicionarNovoProjeto(); break;
-                        case "[red]Voltar[/]": MenuView.MenuPrincipal(); break;
+                        case "[red]Voltar[/]": MenuView.MenuPrincipal().Wait(); break;
                     }
                 }
             } while (true);

@@ -29,6 +29,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
             this.Tarefas = new List<Tarefa>();
             this.StatusTarefas = new List<Status>();
             this.StatusProjeto = Status.EmAndamento;
+            this.DataTermino = default; // Inicializa a data de término como padrão (DateTime.MinValue)
             this.DataInicio = dataInicio;
             this.Prioridade = prioridade;
         }

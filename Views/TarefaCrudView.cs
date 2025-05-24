@@ -201,39 +201,72 @@ namespace SistemaGestaoProjetosETarefas.Views
 
             switch (editarEscolhido)
             {
-                case "[cornflowerblue]1-[/] Nome":
+                case "[cornflowerblue]1-[/] Nome": EditarNome(tarefa); break;
+                case "[cornflowerblue]2-[/] Descrição": EditarDesc(tarefa); break;
+                case "[cornflowerblue]3-[/] Status": EditarStatus(tarefa); break;
+                case "[cornflowerblue]4-[/] Prioridade": EditarPrioridade(tarefa); break;
+                case "[cornflowerblue]5-[/] Funcionário delegado":
                     {
-                        var novoNome = AnsiConsole.Ask<string>($"[cornflowerblue] Novo nome da tarefa: [/] ");
-                        tarefa!.NomeTarefa = novoNome;
-                        AnsiConsole.MarkupLine($"[green] Nome da tarefa alterado com sucesso![/]"); Console.WriteLine("\n");
-                        Thread.Sleep(1000);
-                        break;
+                        var listaFunc = FuncionarioService.ListarFuncionarios();
+                        if (listaFunc.Count != 0)
+                        {
+                            EditarFuncionario(tarefa, listaFunc);
+                            break;
+                        }
+                        else
+                        {
+                            AnsiConsole.MarkupLine("[red] Nenhum funcionário cadastrado![/]");
+                            Thread.Sleep(1000);
+                            break;
+                        }
                     }
-                case "[cornflowerblue]2-[/] Descrição":
-                    {
-                        var novaDescricao = AnsiConsole.Ask<string>("[cornflowerblue] Nova descrição da tarefa: [/]");
-                        tarefa!.DescricaoTarefa = novaDescricao;
-                        AnsiConsole.MarkupLine($"[green] Descrição da tarefa alterada com sucesso![/]!"); Console.WriteLine("\n");
-                        break;
-                    }
-                case "[cornflowerblue]3-[/] Status":
-                    {
-                        var status = StatusService.ListarStatus();
-                        var opcaoStatus = AnsiConsole.Prompt
-                            (
-                                new SelectionPrompt<string>()
-                                .Title("[gold1] Selecione o novo status: [/]")
-                                .AddChoices(status.Keys)
-                            );
-                        var statusEscolhido = status[opcaoStatus];
-                        tarefa!.StatusTarefa = statusEscolhido;
-                        AnsiConsole.MarkupLine($"[green] Status da tarefa alterado com sucesso![/]"); Console.WriteLine("\n");
-                        Thread.Sleep(1000);
-                        break;
-                    }
-                case "[cornflowerblue]4-[/] Prioridade":
-                    {
-                        var prioridade = AnsiConsole.Prompt
+                case "[cornflowerblue]6-[/] [red]Voltar[/]": EscolherTarefaExistente(projeto); break;
+            }
+
+        }
+
+        private static void EditarNome(Tarefa tarefa)
+        {
+            var novoNome = AnsiConsole.Ask<string>($"[cornflowerblue] Novo nome da tarefa: [/] ");
+            var novoNomeFormatado = novoNome.Replace("]", "").Replace("[", "").Trim();
+            tarefa!.NomeTarefa = novoNome;
+            AnsiConsole.MarkupLine($"[green] Nome da tarefa alterado com sucesso![/]"); Console.WriteLine("\n");
+            Thread.Sleep(1000);
+        }
+
+        private static void EditarDesc(Tarefa tarefa)
+        {
+            var novaDescricao = AnsiConsole.Ask<string>("[cornflowerblue] Nova descrição da tarefa: [/]");
+            var novaDescricaoFormatada = novaDescricao.Replace("]", "").Replace("[", "").Trim();
+            tarefa!.DescricaoTarefa = novaDescricao;
+            AnsiConsole.MarkupLine($"[green] Descrição da tarefa alterada com sucesso![/]!"); Console.WriteLine("\n");
+            Thread.Sleep(1000);
+        }
+
+        private static void EditarStatus(Tarefa tarefa)
+        {
+            var status = StatusService.ListarStatus();
+            var opcaoStatus = AnsiConsole.Prompt
+                (
+                    new SelectionPrompt<string>()
+                    .Title("[gold1] Selecione o novo status: [/]")
+                    .AddChoices(status.Keys)
+                );
+            var statusEscolhido = status[opcaoStatus];
+
+            if (statusEscolhido.Categoria == "Concluido")
+                tarefa.FinalizarTarefa();
+            else if (statusEscolhido.Categoria == "Cancelado")
+                tarefa.CancelarTarefa();
+
+            tarefa!.StatusTarefa = statusEscolhido;
+            AnsiConsole.MarkupLine($"[green] Status da tarefa alterado com sucesso![/]"); Console.WriteLine("\n");
+            Thread.Sleep(1000);
+        }
+
+        private static void EditarPrioridade(Tarefa tarefa)
+        {
+            var prioridade = AnsiConsole.Prompt
                             (
                                 new SelectionPrompt<string>()
                                 .Title("[gold1] Selecione a nova prioridade: [/]")
@@ -245,43 +278,24 @@ namespace SistemaGestaoProjetosETarefas.Views
                                         "[cornflowerblue]4-[/] D"
                                 })
                             );
-                        var prioridadeEscolhida = char.Parse(prioridade.Substring(prioridade.Length - 1, 1));
-                        tarefa!.Prioridade = prioridadeEscolhida;
-                        break;
-                    }
-                case "[cornflowerblue]5-[/] Funcionário delegado":
-                    {
-                        var listaFunc = FuncionarioService.ListarFuncionarios();
-                        if (listaFunc.Count != 0)
-                        {
-                            var funcionarios = AnsiConsole.Prompt
-                            (
-                                new SelectionPrompt<string>()
-                                .Title("[gold1] Selecione o novo funcionário: [/]")
-                                .AddChoices(listaFunc.Keys)
-                            );
-
-                            var funcEscolhido = listaFunc[funcionarios];
-                            funcEscolhido.Tarefas!.Add(tarefa);
-                            tarefa.FuncionarioDelegado = funcEscolhido;
-                            AnsiConsole.MarkupLine($"[green] Funcionário delegado alterado com sucesso![/]"); Console.WriteLine("\n");
-                            Thread.Sleep(1000);
-                            break;
-                        }
-                        else
-                        {
-                            AnsiConsole.MarkupLine("[red] Nenhum funcionário cadastrado![/]");
-                            Thread.Sleep(1000);
-                            break;
-                        }
-                    }
-                case "[cornflowerblue]6-[/] [red]Voltar[/]":
-                    {
-                        EscolherTarefaExistente(projeto);
-                        break;
-                    }
-            }
+            var prioridadeEscolhida = char.Parse(prioridade.Substring(prioridade.Length - 1, 1));
+            tarefa!.Prioridade = prioridadeEscolhida;
         }
 
+        private static void EditarFuncionario(Tarefa tarefa, Dictionary<string, Funcionario> listaFunc)
+        {
+            var funcionarios = AnsiConsole.Prompt
+                           (
+                               new SelectionPrompt<string>()
+                               .Title("[gold1] Selecione o novo funcionário: [/]")
+                               .AddChoices(listaFunc.Keys)
+                           );
+
+            var funcEscolhido = listaFunc[funcionarios];
+            funcEscolhido.Tarefas!.Add(tarefa);
+            tarefa.FuncionarioDelegado = funcEscolhido;
+            AnsiConsole.MarkupLine($"[green] Funcionário delegado alterado com sucesso![/]"); Console.WriteLine("\n");
+            Thread.Sleep(1000);
+        }
     }
 }

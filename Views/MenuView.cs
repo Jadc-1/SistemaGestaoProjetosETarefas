@@ -13,7 +13,7 @@ namespace SistemaGestaoProjetosETarefas.Views
 {
     public class MenuView
     {
-        public static void MenuPrincipal()
+        public static async Task MenuPrincipal()
         {
             string opcao;
             do
@@ -40,7 +40,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     case " Gerenciar Projetos": ProjetoMenuView.MenuProjetos(); break;
                     case " Gerenciar Departamentos": DeptMenuView.MenuDepartamentos(); break;
                     case " Gerenciar Usuários": UsuarioMenuView.MenuUsuario(); break;
-                    case " Relatórios": Console.WriteLine("Relatorio"); break;
+                    case " Relatórios": await RelatorioView.MenuRelatorio(); break;
                     case "[red] Sair[/]":
                         {
                             AnsiConsole.Clear();

@@ -40,7 +40,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     case "[cornflowerblue]4 -[/] Editar usuário": UsuarioCrudView.EditarUsuario(); break;
                     case "[cornflowerblue]5 -[/] Desativar usuário": UsuarioCrudView.DesativarUsuario(); break;
                     case "[cornflowerblue]6 -[/] Alterar departamento do usuário": UsuarioCrudView.AlterarDepartamentoUsuario(); break;
-                    case "[red]Voltar[/]": MenuView.MenuPrincipal(); break;
+                    case "[red]Voltar[/]": MenuView.MenuPrincipal().Wait(); break;
                 }
             }
         }
