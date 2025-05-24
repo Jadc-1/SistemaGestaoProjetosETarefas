@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Gestor : Usuario
     {
-        private static int _IdIncremento = 0;
+        private static int _IdIncremento = 1;
         public int IdGestor { get; private set; }
         public List<Projeto> ProjetosGerenciados { get; set; }
 

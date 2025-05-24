@@ -11,23 +11,15 @@ namespace SistemaGestaoProjetosETarefas.Service
     {
         private static List<Departamento> _departamentos { get; set; } = new List<Departamento>();
 
-        public void ListarDepartamentos()
+        public Dictionary<string, Departamento> ListarDepartamentos()
         {
-            if (_departamentos != null)
+            var departamentos = new Dictionary<string, Departamento>(); // Dicionário para armazenar as opções de departamentos ja criados na lista do DepartamentoService
+            foreach (var departamento in _departamentos)
             {
-                foreach (var departamento in _departamentos)
-                {
-                    if (departamento.Ativo != false) // Verifica se o departamento está ativo
-                    {
-                        Console.WriteLine($"ID: {departamento.IdDept} - Nome: {departamento.NomeDept}");
-                    }
-
-                }
+                var chave = $"[cornflowerblue]Departamento [/]{departamento.IdDept}: {departamento.NomeDept}";
+                departamentos.Add(chave, departamento); // Adiciona o departamento ao dicionário
             }
-            else
-            {
-                Console.WriteLine("Nenhum departamento cadastrado.");
-            }
+            return departamentos;
         }
         public void AdicionarDepartamento(Departamento departamento)
         {

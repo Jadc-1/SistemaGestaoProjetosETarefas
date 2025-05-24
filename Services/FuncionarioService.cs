@@ -10,7 +10,7 @@ namespace SistemaGestaoProjetosETarefas.Services
     public class FuncionarioService
     {
         private static readonly List<Funcionario> funcionarios = new List<Funcionario>();
-        
+
         public void AdicionarFuncionario(Funcionario funcionario)
         {
             funcionarios.Add(funcionario);
@@ -27,26 +27,25 @@ namespace SistemaGestaoProjetosETarefas.Services
                 Console.WriteLine("Funcionário não encontrado");
             }
         }
-        public void ListarFuncionario()
+        public static Dictionary<string, Funcionario> ListarFuncionarios()
         {
-            if (funcionarios != null)
+            var dicionarioFunc = new Dictionary<string, Funcionario>();
+            foreach (var funcionario in funcionarios)
             {
-                foreach(var funcionario in funcionarios)
-                {
-                    if(funcionario.Ativo != false)
-                    {
-                        Console.WriteLine($"ID: {funcionario.IdFuncionario} - Nome: {funcionario.Nome} - Email: {funcionario.Email} - Telefone: {funcionario.Telefone} - Data de Cadastro: {funcionario.DataCadastro.ToString("dd/MM/yyyy")}");
-                        if (funcionario.Departamento != null)
-                        {
-                            Console.WriteLine($"Departamento: {funcionario.Departamento.NomeDept}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Departamento: Nenhum departamento associado");
-                        }
-                    }
-                }
+                var chave = $"[cornflowerblue] Funcionário {funcionario.IdFuncionario}[/]: {funcionario.Nome}";
+                dicionarioFunc.Add(chave, funcionario);
             }
+            return dicionarioFunc;
+        }
+
+        public static List<Tarefa> ListarTarefasFuncionario(Funcionario funcionario)
+        {
+            var tarefasFunc = new List<Tarefa>();
+            foreach(var tarefa in funcionario.Tarefas!)
+            {
+                tarefasFunc.Add(tarefa);
+            }
+            return tarefasFunc;
         }
     }
 }

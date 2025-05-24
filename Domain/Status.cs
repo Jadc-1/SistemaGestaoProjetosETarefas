@@ -8,7 +8,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Status
     {
-        private static int _IdIncremento = 0;
+        private static int _IdIncremento = 1;
         public int IdStatus { get; private set; }
         public string? Categoria { get; set; }
 
@@ -26,7 +26,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public static readonly Status EmEspera = new Status("Em Espera");
         public static readonly Status EmRevisao = new Status("Em Revisão");
 
-        public static List<Status> ExibirTodosStatus()
+        public static List<Status> RetornarListaStatus()
         {
             return new List<Status>
             {
@@ -45,7 +45,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
             if (categoria != null)
             {          
                 Status status = new Status(categoria);
-                ExibirTodosStatus().Add(status);
+                RetornarListaStatus().Add(status);
             }
         }
 
@@ -53,7 +53,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
         {
             if (status != null)
             {
-                ExibirTodosStatus().Remove(status);
+                RetornarListaStatus().Remove(status);
             }
         }
     }

@@ -13,12 +13,18 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public string Cidade { get; set; }
         public string Estado { get; set; }
 
-        public Endereco(string rua, string numero, string cidade, string estado) 
+        public Endereco(string rua, string numero, string cidade, string estado)
         {
             this.Rua = rua;
             this.Numero = numero;
             this.Cidade = cidade;
             this.Estado = estado;
         }
+        public override string ToString()
+        {
+            return $"{Rua}, {Numero}, {Cidade}, {Estado}";
+        }
     }
 }
+
+

@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Projeto
     {
-        private static int _IdIncremento = 0;
+        private static int _IdIncremento = 1;
         public int CodigoDoProjeto { get; private set; }
         public string? Nome { get; set; }
         public string? Desc { get; set; }
@@ -21,15 +21,16 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public char Prioridade { get; set; }
         public Gestor? GestorDelegado { get; set; }
 
-        public Projeto(string nome, string desc, DateTime dataInicio, Status statusProjeto, char prioridade)
+        public Projeto(string nome, string desc, DateTime dataInicio, char prioridade)
         {
             CodigoDoProjeto = _IdIncremento++;
             this.Nome = nome;
             this.Desc = desc;
             this.Tarefas = new List<Tarefa>();
             this.StatusTarefas = new List<Status>();
+            this.StatusProjeto = Status.EmAndamento;
+            this.DataTermino = default; // Inicializa a data de término como padrão (DateTime.MinValue)
             this.DataInicio = dataInicio;
-            this.StatusProjeto = statusProjeto;
             this.Prioridade = prioridade;
         }
 
@@ -46,14 +47,6 @@ namespace SistemaGestaoProjetosETarefas.Domain
             if (tarefa != null && Tarefas != null)
             {
                 Tarefas.Remove(tarefa);
-            }
-        }
-
-        public void AlterarStatus(Status status)
-        {
-            if (status != null)
-            {
-                this.StatusProjeto = status;
             }
         }
 
@@ -92,6 +85,11 @@ namespace SistemaGestaoProjetosETarefas.Domain
             this.DataTermino = DateTime.Now;
         }
 
+        public void CancelarProjeto()
+        {
+            this.StatusProjeto = Status.Cancelado;
+            this.DataTermino = DateTime.Now;
+        }
 
         public override string ToString()
         {

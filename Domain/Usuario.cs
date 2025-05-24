@@ -9,7 +9,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
 {
     public class Usuario
     {
-        private static int _proximoId = 0; // Variável estática para gerar IDs únicos
+        private static int _proximoId = 1; // Variável estática para gerar IDs únicos
         public int IdDoUsuario { get; private set; }
         public string? Nome { get; set; }
         public string? Email { get; set; } 
@@ -17,7 +17,7 @@ namespace SistemaGestaoProjetosETarefas.Domain
         public DateTime DataCadastro { get; set; }
         public Endereco? Endereco { get; set; } // Propriedade para armazenar o endereço do usuário
         public bool Ativo { get; set; } = true; // Propriedade para indicar se o usuário está ativo ou não
-
+        
 
         public Usuario (string nome, string email, string telefone, DateTime dataCadastro, Endereco? endereco)
         {

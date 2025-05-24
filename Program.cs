@@ -1,7 +1,6 @@
-﻿using SistemaGestaoProjetosETarefas.Service;
-using SistemaGestaoProjetosETarefas.Domain;
-using System;
+﻿using System;
 using SistemaGestaoProjetosETarefas.Services;
+using SistemaGestaoProjetosETarefas.Views;
 
 namespace SistemaGestaoProjetosETarefas
 {
@@ -9,6 +8,7 @@ namespace SistemaGestaoProjetosETarefas
     {
         static void Main(string[] args)
         {
+            MenuView.MenuPrincipal().Wait();
         }
     }
 }

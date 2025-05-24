@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaGestaoProjetosETarefas.Domain;
@@ -20,7 +21,7 @@ namespace SistemaGestaoProjetosETarefas.Services
         public void DesativarGestor(int id)
         {
             var gestor = gestores.FirstOrDefault(g => g.IdGestor == id);
-            if(gestor != null)
+            if (gestor != null)
             {
                 gestor.Desativar(gestor);
             }
@@ -30,30 +31,25 @@ namespace SistemaGestaoProjetosETarefas.Services
             }
 
         }
-        public void ListarGestores()
+        public static Dictionary<string, Gestor> ListarGestores()
         {
-            if (gestores != null)
+            var gestorDict = new Dictionary<string, Gestor>();
+            foreach (var gestor in gestores)
             {
-                foreach (var gestor in gestores)
-                {
-                    if (gestor.Ativo != false)
-                    {
-                        Console.WriteLine($"ID: {gestor.IdGestor} \nNome: {gestor.Nome} \nEmail: {gestor.Email} \nTelefone: {gestor.Telefone} \nData de Cadastro: {gestor.DataCadastro.ToString("dd/MM/yyyy")}\n");
-                        Console.WriteLine("(Projetos Gerenciados)");
-                        if (gestor.ProjetosGerenciados != null)
-                        {
-                            foreach (var projeto in gestor.ProjetosGerenciados)
-                            {
-                                Console.WriteLine($" {projeto.CodigoDoProjeto}- Projeto: {projeto.Nome}");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Nenhum projeto associado");
-                        }
-                    }
-                }
+                var chave = $"[cornflowerblue] Gestor {gestor.IdGestor}: [/] {gestor.Nome}";
+                gestorDict.Add(chave, gestor);
             }
+            return gestorDict;
+        }
+
+        public static List<Projeto> ListarProjetosGestor(Gestor gestor)
+        {
+            var projetosGestor = new List<Projeto>();
+            foreach (var tarefa in gestor.ProjetosGerenciados)
+            {
+                projetosGestor.Add(tarefa);
+            }
+            return projetosGestor;
         }
     }
 }
