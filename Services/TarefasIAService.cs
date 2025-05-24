@@ -14,7 +14,8 @@ namespace SistemaGestaoProjetosETarefas.Services
         public static async Task<List<Tarefa>> CriarTarefasIAAsync(Projeto projeto)
         {
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "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"); //Autoriza utilizar a API, por meio da APIKey
+            var apiKey = File.ReadAllText("tarefa.txt").Trim();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey); //Autoriza utilizar a API, por meio da APIKey
             httpClient.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost");
             httpClient.DefaultRequestHeaders.Add("X-Title", "ProjetoGestaoTarefas");
 

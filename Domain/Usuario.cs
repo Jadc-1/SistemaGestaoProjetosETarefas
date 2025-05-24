@@ -34,13 +34,6 @@ namespace SistemaGestaoProjetosETarefas.Domain
             usuario.Ativo = false;
         }
 
-        public virtual void Editar(string nome, string email, string telefone, DateTime dataCadastro)
-        {
-            this.Nome = nome;
-            this.Email = email;
-            this.Telefone = telefone;
-            this.DataCadastro = dataCadastro;
-        }
 
         public override string ToString()
         {

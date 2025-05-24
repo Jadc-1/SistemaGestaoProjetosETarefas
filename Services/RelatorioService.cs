@@ -14,7 +14,8 @@ namespace SistemaGestaoProjetosETarefas.Services
         public static async Task<string?> GerarRelatorioIAAsync(Projeto projetoSelecionado)
         {
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "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"); //Autoriza utilizar a API, por meio da APIKey
+            var apiKey = File.ReadAllText("relatorio.txt").Trim();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey); //Autoriza utilizar a API, por meio da APIKey
             httpClient.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost"); 
             httpClient.DefaultRequestHeaders.Add("X-Title", "ProjetoGestaoTarefas");
 

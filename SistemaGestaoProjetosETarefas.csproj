@@ -8,6 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="relatorio.txt" />
+    <None Remove="tarefa.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="relatorio.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tarefa.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="iTextSharp" Version="5.5.13.4" />
     <PackageReference Include="Spectre.Console" Version="0.50.0" />
   </ItemGroup>
