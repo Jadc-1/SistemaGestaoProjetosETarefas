@@ -1,4 +1,4 @@
-# Sistema de Gestão de Projetos e Tarefas em console (EM ANDAMENTO)
+# Sistema de Gestão de Projetos e Tarefas em console 
 
 Este é um sistema em C# para gerenciamento de projetos e tarefas, com geração automática de tarefas usando inteligência artificial (IA), desenvolvido para um trabalho da faculdade de Análise e Desenvolvimento.
 
