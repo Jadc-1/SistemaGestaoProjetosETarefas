@@ -1,6 +1,7 @@
 ﻿using SistemaGestaoProjetosETarefas.Domain;
 using Spectre.Console;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,12 @@ using System.Threading.Tasks;
 
 namespace SistemaGestaoProjetosETarefas.Services
 {
+    
+    public class RespostaTarefas
+    {
+        public List<Tarefa>? Tarefas { get; set; }
+    }
+
     public class TarefasIAService
     {
         public static async Task<List<Tarefa>> CriarTarefasIAAsync(Projeto projeto)
@@ -40,10 +47,9 @@ namespace SistemaGestaoProjetosETarefas.Services
             if (response.IsSuccessStatusCode)
             {
                 var responseData = JsonSerializer.Deserialize<JsonElement>(responseJson);
-                var resposta = responseData.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString(); // Pega a resposta da API
-
-                var tarefas = JsonSerializer.Deserialize<List<Tarefa>>(resposta!); // Deserializa a resposta em uma lista de tarefas
-                return tarefas!;
+                var resposta = responseData.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString(); // Pega a resposta da API  
+                var resultado = JsonSerializer.Deserialize<List<Tarefa>>(resposta!); // Deserializa a resposta em uma lista de tarefas
+                return resultado!;
             }
             else
             {
@@ -58,8 +64,12 @@ namespace SistemaGestaoProjetosETarefas.Services
             sb.AppendLine($"Gere uma lista de tarefas para o projeto \"{projeto.Nome}\". Descrição do projeto: {projeto.Desc}");
             sb.AppendLine("Traga apenas isso no json, não traga mais nada, nem mesmo o nome do projeto.");
             sb.AppendLine("Apenas traga as tarefas, não traga o gestor, nem o status do projeto.");
-            sb.AppendLine("Retorna listas em formato JSON com as informações logo acima, máximo 10 listas");
-            sb.AppendLine("Lembre-se apenas por exemplo NomeTarefa: \"Nome da tarefa\", DescricaoTarefa: \"Descrição da tarefa\", Prioridade: \"A\".");
+            sb.AppendLine("Me retorne apenas uma lista de objetos JSON com as propriedades NomeTarefa, DescricaoTarefa e Prioridade, sem nenhum campo externo como tarefas. Apenas a lista direta.");
+            sb.AppendLine("Lembre-se, não mude a chave, tem que ser o que eu definir aqui");
+            sb.AppendLine("Siga esse exemplo: ");
+            sb.AppendLine(
+                " {\r\n    \"NomeTarefa\": \"Criar diagrama de fluxo\",\r\n    \"DescricaoTarefa\": \"Desenvolver um diagrama de fluxo detalhado para o projeto\",\r\n    \"Prioridade\": \"A(apenas A, B, C, D)\"\r\n  },"
+                );
             return sb.ToString();
         }
     }

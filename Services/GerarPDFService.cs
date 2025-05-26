@@ -36,7 +36,6 @@ namespace SistemaGestaoProjetosETarefas.Services
 
                 Font fonteNormal = FontFactory.GetFont(FontFactory.HELVETICA, 12); // Fonte normal, tamanho 12
                 iTextSharpParagraph paragrafo = new iTextSharpParagraph(conteudo, fonteNormal); // Cria um novo parágrafo para o conteúdo do PDF
-                paragrafo.Add(conteudo); // Adiciona o conteúdo ao parágrafo
 
                 
                 doc.Add(paragrafo); // Adiciona o parágrafo ao documento

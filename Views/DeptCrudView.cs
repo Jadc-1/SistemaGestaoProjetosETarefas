@@ -86,7 +86,7 @@ namespace SistemaGestaoProjetosETarefas.Views
             {
                 AnsiConsole.Clear();
                 var departamentos = new DepartamentoService().ListarDepartamentos();
-                AnsiConsole.Write(new Rule("Desativar Departamento").RuleStyle("grey").Centered());
+                AnsiConsole.Write(new Rule("[gold1]Desativar Departamento[/]").RuleStyle("grey").Centered());
                 var opcao = AnsiConsole.Prompt
                     (
                         new SelectionPrompt<string>()
@@ -107,7 +107,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     var confirmar = AnsiConsole.Prompt
                         (
                             new SelectionPrompt<string>()
-                            .Title("Você tem certeza que deseja desativar o departamento?")
+                            .Title("[gold1] Você tem certeza que deseja desativar o departamento?[/]")
                             .AddChoices(new[]
                             {
                                 "[green]Sim[/]",
