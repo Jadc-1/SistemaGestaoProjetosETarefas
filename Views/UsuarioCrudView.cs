@@ -51,24 +51,31 @@ namespace SistemaGestaoProjetosETarefas.Views
                 AnsiConsole.Write(new Rule("[gold1]Adicionar Novo Gestor[/]").RuleStyle("grey").Centered());
                 Console.WriteLine();
                 var nome = AnsiConsole.Ask<string>(("[cornflowerblue] Nome do Gestor: [/] "));
+                var nomeFormatado = nome.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var email = AnsiConsole.Ask<string>(("[cornflowerblue] E-mail do Gestor: [/] "));
+                var emailFormatado = email.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var telefone = AnsiConsole.Ask<string>(("[cornflowerblue] Telefone do Gestor: [/] "));
+                var telefoneFormatado = telefone.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 AnsiConsole.Write(new Rule("[gold1]Endereço[/]").RuleStyle("grey").LeftJustified());
                 Console.WriteLine();
                 var estado = AnsiConsole.Ask<string>(("[cornflowerblue] Estado: [/] "));
+                var estadoFormatado = estado.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var cidade = AnsiConsole.Ask<string>(("[cornflowerblue] Cidade: [/] "));
+                var cidadeFormatada = cidade.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var rua = AnsiConsole.Ask<string>(("[cornflowerblue] Rua: [/] "));
+                var ruaFormatada = rua.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var numero = AnsiConsole.Ask<string>(("[cornflowerblue] Número: [/] "));
+                var numeroFormatado = numero.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
                 Console.WriteLine();
-                var endereco = new Endereco(rua, numero, cidade, estado);
+                var endereco = new Endereco(ruaFormatada, numeroFormatado, cidadeFormatada, estadoFormatado);
                 var dataAdmissao = DateTime.Now;
                 var opcao = AnsiConsole.Prompt
                     (
@@ -78,7 +85,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                 if (opcao == "[green] Sim[/]")
                 {
-                    var gestor = new Gestor(nome, email, telefone, dataAdmissao, endereco);
+                    var gestor = new Gestor(nomeFormatado, emailFormatado, telefoneFormatado, dataAdmissao, endereco);
                     GestorService gestorService = new GestorService();
                     gestorService.AdicionarGestor(gestor);
                     Console.WriteLine();
@@ -109,23 +116,30 @@ namespace SistemaGestaoProjetosETarefas.Views
                 AnsiConsole.Write(new Rule("[gold1]Adicionar Novo Funcionário[/]").RuleStyle("grey").Centered());
                 Console.WriteLine();
                 var nome = AnsiConsole.Ask<string>(("[cornflowerblue] Nome do Funcionário: [/] "));
+                var nomeFormatado = nome.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var email = AnsiConsole.Ask<string>(("[cornflowerblue] E-mail do Funcionário: [/] "));
+                var emailFormatado = email.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var telefone = AnsiConsole.Ask<string>(("[cornflowerblue] Telefone do Funcionário: [/] "));
+                var telefoneFormatado = telefone.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 AnsiConsole.Write(new Rule("[gold1]Endereço[/]").RuleStyle("grey").LeftJustified());
                 Console.WriteLine();
                 var estado = AnsiConsole.Ask<string>(("[cornflowerblue] Estado: [/] "));
+                var estadoFormatado = estado.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var cidade = AnsiConsole.Ask<string>(("[cornflowerblue] Cidade: [/] "));
+                var cidadeFormatada = cidade.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var rua = AnsiConsole.Ask<string>(("[cornflowerblue] Rua: [/] "));
+                var ruaFormatada = rua.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var numero = AnsiConsole.Ask<string>(("[cornflowerblue] Número: [/] "));
+                var numeroFormatado = numero.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
-                var endereco = new Endereco(rua, numero, cidade, estado);
+                var endereco = new Endereco(ruaFormatada, numeroFormatado, cidadeFormatada, estadoFormatado);
                 var dataAdmissao = DateTime.Now;
                 Console.WriteLine();
                 Departamento departamentoEscolhido = null!;
@@ -150,7 +164,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                 {
                     Console.WriteLine();
 
-                    var funcionario = new Funcionario(nome, email, telefone, dataAdmissao, endereco);
+                    var funcionario = new Funcionario(nomeFormatado, emailFormatado, telefoneFormatado, dataAdmissao, endereco);
                     if (departamentoEscolhido != null)
                     {
                         departamentoEscolhido.AdicionarFuncionario(funcionario);
@@ -218,7 +232,8 @@ namespace SistemaGestaoProjetosETarefas.Views
                     case "[cornflowerblue]1 -[/] Nome":
                         {
                             var novoNome = AnsiConsole.Ask<string>(("[cornflowerblue] Novo Nome: [/] "));
-                            usuarioEscolhido.Nome = novoNome;
+                            var novoNomeFormatado = novoNome.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
+                            usuarioEscolhido.Nome = novoNomeFormatado;
                             Console.WriteLine();
                             AnsiConsole.Markup("[green] Nome editado com sucesso![/]");
                             Thread.Sleep(1000);
@@ -228,7 +243,8 @@ namespace SistemaGestaoProjetosETarefas.Views
                     case "[cornflowerblue]2 -[/] E-mail":
                         {
                             var novoEmail = AnsiConsole.Ask<string>(("[cornflowerblue] Novo E-mail: [/] "));
-                            usuarioEscolhido.Email = novoEmail;
+                            var novoEmailFormatado = novoEmail.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
+                            usuarioEscolhido.Email = novoEmailFormatado;
                             Console.WriteLine();
                             AnsiConsole.Markup("[green] E-mail editado com sucesso![/]");
                             Thread.Sleep(1000);
@@ -237,7 +253,8 @@ namespace SistemaGestaoProjetosETarefas.Views
                     case "[cornflowerblue]3 -[/] Telefone":
                         {
                             var novoTelefone = AnsiConsole.Ask<string>(("[cornflowerblue] Novo Telefone: [/] "));
-                            usuarioEscolhido.Telefone = novoTelefone;
+                            var novoTelefoneFormatado = novoTelefone.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
+                            usuarioEscolhido.Telefone = novoTelefoneFormatado;
                             Console.WriteLine();
                             AnsiConsole.Markup("[green] Telefone editado com sucesso![/]");
                             Thread.Sleep(1000);
@@ -248,17 +265,21 @@ namespace SistemaGestaoProjetosETarefas.Views
                             AnsiConsole.Write(new Rule("[gold1]Endereço[/]").RuleStyle("grey").LeftJustified());
                             Console.WriteLine();
                             var novoEstado = AnsiConsole.Ask<string>(("[cornflowerblue] Novo Estado: [/] "));
+                            var novoEstadoFormatado = novoEstado.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                             Console.WriteLine();
                             var novaCidade = AnsiConsole.Ask<string>(("[cornflowerblue] Nova Cidade: [/] "));
+                            var novaCidadeFormatada = novaCidade.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                             Console.WriteLine();
                             var novaRua = AnsiConsole.Ask<string>(("[cornflowerblue] Nova Rua: [/] "));
+                            var novaRuaFormatada = novaRua.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários;
                             Console.WriteLine();
                             var novoNumero = AnsiConsole.Ask<string>(("[cornflowerblue] Novo Número: [/] "));
+                            var novoNumeroFormatado = novoNumero.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                             Console.WriteLine();
-                            usuarioEscolhido.Endereco!.Estado = novoEstado;
-                            usuarioEscolhido.Endereco.Cidade = novaCidade;
-                            usuarioEscolhido.Endereco.Rua = novaRua;
-                            usuarioEscolhido.Endereco.Numero = novoNumero;
+                            usuarioEscolhido.Endereco!.Estado = novoEstadoFormatado;
+                            usuarioEscolhido.Endereco.Cidade = novaCidadeFormatada;
+                            usuarioEscolhido.Endereco.Rua = novaRuaFormatada;
+                            usuarioEscolhido.Endereco.Numero = novoNumeroFormatado;
                             Console.WriteLine();
                             AnsiConsole.Markup("[green] Endereço editado com sucesso![/]");
                             EditarUsuario(); break;

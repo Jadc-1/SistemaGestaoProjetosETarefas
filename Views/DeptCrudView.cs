@@ -19,7 +19,8 @@ namespace SistemaGestaoProjetosETarefas.Views
                 AnsiConsole.Write(new Rule("[gold1 bold]Adicionar Departamento[/]").RuleStyle("grey").Centered());
                 Console.WriteLine();
                 var nome = AnsiConsole.Ask<string>("[cornflowerblue] Digite o nome do departamento: [/]");
-                var departamento = new Departamento(nome);
+                var nomeFormatado = nome.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
+                var departamento = new Departamento(nomeFormatado);
                 Console.WriteLine();
                 var confirmar = AnsiConsole.Prompt
                     (
@@ -71,7 +72,8 @@ namespace SistemaGestaoProjetosETarefas.Views
                 {
                     var departamentoSelecionado = departamentos[opcao];
                     var novoNome = AnsiConsole.Ask<string>("[cornflowerblue] Digite o novo nome do departamento:[/]");
-                    departamentoSelecionado.NomeDept = novoNome;
+                    var novoNomeFormatado = novoNome.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
+                    departamentoSelecionado.NomeDept = novoNomeFormatado;
                     Console.WriteLine();
                     AnsiConsole.MarkupLine($"[green] Departamento editado com sucesso![/]");
                     Thread.Sleep(500);

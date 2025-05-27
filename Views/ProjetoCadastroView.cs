@@ -20,8 +20,10 @@ namespace SistemaGestaoProjetosETarefas.Views
                 AnsiConsole.Write(new Rule("[gold1]Adicionar Novo Projeto[/]").RuleStyle("grey").Centered());
                 Console.WriteLine();
                 var nome = AnsiConsole.Ask<string>(("[cornflowerblue] Nome do Projeto: [/] "));
+                var nomeFormatado = nome.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var descricao = AnsiConsole.Ask<string>(("[cornflowerblue] Descrição do Projeto: [/] "));
+                var descricaoFormatada = descricao.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var dataInicio = DateTime.Now;
                 var prioridade = AnsiConsole.Prompt
@@ -62,7 +64,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                        
                     }
                     Console.WriteLine();
-                    var projeto = ConfirmarProjeto(nome, descricao, dataInicio, prioridadeEscolhida); // Chama o método para confirmar a adição do projeto
+                    var projeto = ConfirmarProjeto(nomeFormatado, descricaoFormatada, dataInicio, prioridadeEscolhida); // Chama o método para confirmar a adição do projeto
                     projeto.AtribuirGestor(gestorEscolhido!); // Atribui o gestor ao projeto
                     gestorEscolhido!.ProjetosGerenciados.Add(projeto); // Adiciona o projeto à lista de projetos do gestor
                     ProjetoService projetoService = new ProjetoService();
@@ -73,14 +75,14 @@ namespace SistemaGestaoProjetosETarefas.Views
                 else
                 {
                     Console.WriteLine();
-                    var projeto = ConfirmarProjeto(nome, descricao, dataInicio, prioridadeEscolhida); // Chama o método para confirmar a adição do projeto
+                    var projeto = ConfirmarProjeto(nomeFormatado, descricaoFormatada, dataInicio, prioridadeEscolhida); // Chama o método para confirmar a adição do projeto
                     AnsiConsole.MarkupLine($"[green] Projeto {projeto.Nome} Adicionado com sucesso![/]"); Console.WriteLine("\n");
                     Thread.Sleep(1000);
                     ProjetoMenuView.MenuProjetos(); // Chama o método para exibir o menu de projetos
                 }
             }
         }
-        private static Projeto ConfirmarProjeto(string nome, string descricao, DateTime dataInicio, char prioridadeEscolhida)
+        private static Projeto ConfirmarProjeto(string nomeFormatado, string descricaoFormatada, DateTime dataInicio, char prioridadeEscolhida)
         {
             while (true)
             {
@@ -97,7 +99,7 @@ namespace SistemaGestaoProjetosETarefas.Views
 
                 if (adicionar == "[green] Confirmar[/]")
                 {
-                    Projeto projeto = new Projeto(nome, descricao, dataInicio, prioridadeEscolhida);
+                    Projeto projeto = new Projeto(nomeFormatado, descricaoFormatada, dataInicio, prioridadeEscolhida);
                     ProjetoService projetoService = new ProjetoService();
                     projetoService.AdicionarProjeto(projeto); // Chama o método para adicionar o projeto
                     return projeto;

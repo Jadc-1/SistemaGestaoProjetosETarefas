@@ -80,8 +80,10 @@ namespace SistemaGestaoProjetosETarefas.Views
                 Console.WriteLine();
 
                 var nome = AnsiConsole.Ask<string>(($"[cornflowerblue] Nome da Tarefa: [/] "));
+                var nomeFormatado = nome.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var descricao = AnsiConsole.Ask<string>(($"[cornflowerblue] Descrição da Tarefa: [/] ")); //descrição poderá ser nula ou vazia
+                var descricaoFormatada = descricao.Replace("[", "").Replace("]", "").Trim(); // Remove colchetes e espaços desnecessários
                 Console.WriteLine();
                 var dataInicio = DateTime.Now;
 
@@ -125,7 +127,7 @@ namespace SistemaGestaoProjetosETarefas.Views
                     );
                 if (adicionar == "[green] Confirmar[/]")
                 {
-                    Tarefa tarefa = new Tarefa(nome, descricao, dataInicio, statusEscolhido, prioridadeEscolhida);
+                    Tarefa tarefa = new Tarefa(nomeFormatado, descricaoFormatada, dataInicio, statusEscolhido, prioridadeEscolhida);
                     projeto.AdicionarTarefa(tarefa); // Chama o método para adicionar a tarefa ao projeto
                     AnsiConsole.MarkupLine($"[green] Tarefa {tarefa.NomeTarefa} Adicionada com sucesso![/]"); Console.WriteLine("\n");
                     Thread.Sleep(1000);
@@ -284,7 +286,7 @@ namespace SistemaGestaoProjetosETarefas.Views
         {
             var novoNome = AnsiConsole.Ask<string>($"[cornflowerblue] Novo nome da tarefa: [/] ");
             var novoNomeFormatado = novoNome.Replace("]", "").Replace("[", "").Trim();
-            tarefa!.NomeTarefa = novoNome;
+            tarefa!.NomeTarefa = novoNomeFormatado;
             AnsiConsole.MarkupLine($"[green] Nome da tarefa alterado com sucesso![/]"); Console.WriteLine("\n");
             Thread.Sleep(1000);
         }
@@ -293,7 +295,7 @@ namespace SistemaGestaoProjetosETarefas.Views
         {
             var novaDescricao = AnsiConsole.Ask<string>("[cornflowerblue] Nova descrição da tarefa: [/]");
             var novaDescricaoFormatada = novaDescricao.Replace("]", "").Replace("[", "").Trim();
-            tarefa!.DescricaoTarefa = novaDescricao;
+            tarefa!.DescricaoTarefa = novaDescricaoFormatada;
             AnsiConsole.MarkupLine($"[green] Descrição da tarefa alterada com sucesso![/]!"); Console.WriteLine("\n");
             Thread.Sleep(1000);
         }
