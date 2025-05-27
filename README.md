@@ -43,7 +43,7 @@ Este é um sistema em C# para gerenciamento de projetos e tarefas, com geração
    1- Crie duas **APIKEYs** no link abaixo e salve-as em um local para usar posteriomente (é preciso realizar o cadastro no site da OpenRouter):
        https://openrouter.ai/settings/keys
 
-   2- Exclua os arquivos tarefas.txt e relatorio.txt
+   2- Exclua os arquivos tarefas.txt e relatorio.txt (Caso não tenha excluído)
 
    3- Crie os dois arquivos novamente, e salve uma apiKey em cada arquivo.
 
