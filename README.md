@@ -34,7 +34,30 @@ Este é um sistema em C# para gerenciamento de projetos e tarefas, com geração
    ```bash
    dotnet run
 
+4. **Exclua os arquivos tarefas.txt e relatorio.txt**
+      É preciso excluir os dois arquivos para que seja possível rodar o projeto. Logo abaixo terá um passo a passo de como criá-los novamente para ter acesso ao uso das APIs.
+   
+
+## COMO UTILIZAR AS FUNCIONALIDADES DAS APIs 
+
+   1- Crie duas **APIKEY** no link abaixo e salve-as em um local para usar posteriomente:
+       https://openrouter.ai/settings/keys
+
+   2- Exclua os arquivos tarefas.txt e relatorio.txt
+
+   3- Crie os dois arquivos novamente, e salve uma apiKey em cada arquivo.
+
+   4- Pronto, agora será possível utilizar as funcionalidades das APIs
+
+   5- As requisições para o modelo de API que estamos utilizando é pago, porém caso queria utilizar um modelo free basta apenas modificar o model nos arquivos TarefasAIService e RelatorioService: 
+
+
+   ![modelIA](https://github.com/user-attachments/assets/c0ecdc2d-8036-4c22-b394-91b24ace864e)
+
+   Modifique o model para: **mistralai/mistral-7b-instruct:free**
+   
 ## ⚠️ Requisitos
 
 - NET 7 ou superior instalado
--Conexão com a internet (para uso da IA)
+
+- Conexão com a internet (para uso da IA)
