@@ -40,7 +40,7 @@ Este é um sistema em C# para gerenciamento de projetos e tarefas, com geração
 
 ## COMO UTILIZAR AS FUNCIONALIDADES DAS APIs 
 
-   1- Crie duas **APIKEY** no link abaixo e salve-as em um local para usar posteriomente:
+   1- Crie duas **APIKEY** no link abaixo e salve-as em um local para usar posteriomente (é preciso realizar o cadastro no site da OpenRouter):
        https://openrouter.ai/settings/keys
 
    2- Exclua os arquivos tarefas.txt e relatorio.txt
