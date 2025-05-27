@@ -28,14 +28,16 @@ Este é um sistema em C# para gerenciamento de projetos e tarefas, com geração
    
 2. Restaure o pacote Nuget
    ```bash
-   dotnet restore
+   dotnet restore]
 
-3. Execute o projeto
+3. **Exclua os arquivos tarefas.txt e relatorio.txt**
+      É preciso excluir os dois arquivos para que seja possível rodar o projeto. Logo abaixo terá um passo a passo de como criá-los novamente para ter acesso ao uso das APIs.
+
+4. Execute o projeto
    ```bash
    dotnet run
 
-4. **Exclua os arquivos tarefas.txt e relatorio.txt**
-      É preciso excluir os dois arquivos para que seja possível rodar o projeto. Logo abaixo terá um passo a passo de como criá-los novamente para ter acesso ao uso das APIs.
+
    
 
 ## COMO UTILIZAR AS FUNCIONALIDADES DAS APIs 
